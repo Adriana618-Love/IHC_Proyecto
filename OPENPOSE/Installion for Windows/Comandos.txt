@@ -1,0 +1,8 @@
+#Visit de web to verify how install pytorch in your project
+https://pytorch.org/get-started/locally/
+#Add torch at your project
+pip install https://download.pytorch.org/whl/cu101/torch-1.4.0-cp38-cp38-win_amd64.whl
+#Add COCO API at your proyect
+pip3 install -U scikit-image
+pip3 install -U cython 
+pip3 install "git+https://github.com/philferriere/cocoapi.git#egg=pycocotools&subdirectory=PythonAPI"
