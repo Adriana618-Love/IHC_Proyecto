@@ -1,8 +1,11 @@
 # IHC_Proyecto
-
+## Para el juego en Unity
 Todo el proyecto aquí realizado es compatible con Unity, no hay mayor dificultad que añadir todo el proyecto a Unity.
+### Requisitos
  * Unity Versión 2020.1.3f1
  * Windows 10
+
+La escena inicial es menu
 
 ## Para ejecutar el servidor
 ### Requisitos:
