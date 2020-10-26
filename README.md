@@ -1,4 +1,6 @@
 # IHC_Proyecto
+Primero se debe correr el servidor y luego el juego.
+
 ## Para el juego en Unity
 Todo el proyecto aquí realizado es compatible con Unity, no hay mayor dificultad que añadir todo el proyecto a Unity.
 ### Requisitos
