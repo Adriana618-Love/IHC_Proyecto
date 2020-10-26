@@ -1,0 +1,1 @@
+python main.py --checkpoint-path checkpoints/checkpoint_iter_370000.pth --video 0
