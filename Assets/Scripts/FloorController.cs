@@ -47,7 +47,7 @@ public class FloorController : MonoBehaviour
     
     void Update()
     {
-        Debug.Log("Update");
+        //Debug.Log("Update");
         if(Time.time - _starTime >= _intervalTime || _cutre) // Crear algo cada _intervalTime
         {
             GameObject Spike;

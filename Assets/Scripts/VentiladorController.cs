@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.SceneManagement;
 
-public class GloboController : MonoBehaviour
+public class VentiladorController : MonoBehaviour
 {
     //server manager
     public GameObject serverManager_;
@@ -53,8 +53,8 @@ public class GloboController : MonoBehaviour
         direction = new Vector2(4, -4);
         speed = static_speed;
 
-        /*actions.Add("izquierda", Left);
-        actions.Add("derecha", Right);
+        /*actions.Add("izquierda", GirarAntihorario);
+        actions.Add("derecha", GirarHorario);
 
         actions.Add("pausa", Stop);
         actions.Add("menu", Menu);
@@ -70,25 +70,25 @@ public class GloboController : MonoBehaviour
         actions[speech.text].Invoke();
     }
 
-    public void Left_(){
-        transform.Translate(-2, 0, 0);
+    public void GirarAntihorario_(){
+        transform.Rotate (Vector3.back * 90);
     }
 
-    public void Left()
+    public void GirarAntihorario()
     {
-        Left_();
-        server.write("GI");
+        GirarAntihorario_();
+        server.write("VG");
     }
 
-    public void Right_(){
-        transform.Translate(2, 0, 0);
+    public void GirarHorario_(){
+        transform.Rotate (Vector3.forward * 90);
     }
 
-    public void Right()
+    public void GirarHorario()
     {
         //Debug.Log("derecha");
-        Right_();
-        server.write("GD");
+        GirarHorario_();
+        server.write("VH");
     }
 
     public void Stop()
@@ -193,13 +193,13 @@ public class GloboController : MonoBehaviour
         Vector2 movement = direction.normalized * speed * Time.deltaTime;
         transform.Translate(movement);
         if (transform.position.y <= minY) speed = 0;
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            Left();
+            GirarAntihorario();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            Right();
+            GirarHorario();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {

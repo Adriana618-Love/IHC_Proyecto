@@ -29,7 +29,7 @@ public class TrampolinController : MonoBehaviour
     {
         if (Time.time - _startTime > timeChange)
         {
-            Debug.Log("Cambio");
+            //Debug.Log("Cambio");
             speed = newSpeed;
         }
     }

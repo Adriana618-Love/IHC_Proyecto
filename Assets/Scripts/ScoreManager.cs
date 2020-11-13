@@ -56,7 +56,7 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Ploteando");
+            //Debug.Log("Ploteando");
             in_score += 1;
             plot("SCORE: " + in_score.ToString(), score);
             yield return new WaitForSeconds(1);

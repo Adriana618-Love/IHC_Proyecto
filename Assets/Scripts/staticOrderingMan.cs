@@ -37,12 +37,12 @@ public class staticOrderingMan : MonoBehaviour
 	{
 		if (staticMan.compareMoves(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves) && _tutorialInit)
 		{
-			Debug.Log("movimiento hecho");
+			//Debug.Log("movimiento hecho");
 			texto.text = "Bien Hecho";
 			Invoke("Desapear", 1.5f);
 			GloboController myScript = Ballon.GetComponent<GloboController>();
 			myScript.Elevar();
-			Debug.Log("Se eleva el globo");
+			//Debug.Log("Se eleva el globo");
 			staticMan.makeMove();
 			count += 1;
 		}

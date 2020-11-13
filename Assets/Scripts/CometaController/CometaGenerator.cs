@@ -19,7 +19,7 @@ public class CometaGenerator : MonoBehaviour
         width = width / 2;
         minAxisX = -width + 1;
         maxAxisX = width - 1;
-        Debug.Log(minAxisX.ToString() + " " + maxAxisX.ToString());
+        //Debug.Log(minAxisX.ToString() + " " + maxAxisX.ToString());
     }
 
     // Update is called once per frame

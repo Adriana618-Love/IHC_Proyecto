@@ -41,9 +41,10 @@ public class screencapture : MonoBehaviour
 
 
 		//StartCoroutine(write ()); 
-		setupSocket();
+		/*setupSocket();
 		theWriter.Write('Y');
-		theWriter.Flush();
+		theWriter.Flush();*/
+		StartCoroutine("intentarConectar");
 	}
 
 	public void Update()
@@ -53,47 +54,66 @@ public class screencapture : MonoBehaviour
 		if (socketReady)
 		{
 			//cuando el servidor no se encuentra corriendo
-			Debug.Log("Juega con tus movimientos!!!...");
+			//Debug.Log("Juega con tus movimientos!!!...");
 
 			readSocket();
 		}
 		/*else{
 			//cuando el servidor no se encuentra corriendo
 			Debug.Log("Usa las teclas!!!...");
-
-			//intentar conectar con el server
-			setupSocket ();
-			if(socketReady){
-				//enviar mensaje para confirmar la conexión con el server
-				theWriter.Write('Y');
-				theWriter.Flush();
-			}
 		}*/
 	}
 
+	
+    IEnumerator intentarConectar()
+    {
+		Debug.Log("Intentando conectar al server..");
+        //intentar conectar con el server
+		setupSocket ();
+		if(socketReady){
+			Debug.Log("Conectado al server..");
+			//enviar mensaje para confirmar la conexión con el server
+			theWriter.Write('Y');
+			theWriter.Flush();
+		}
+		else{
+			yield return new WaitForSeconds(5);
+			StartCoroutine("intentarConectar");
+		}
+        
+    }
+
 	void OnApplicationQuit()
 	{
-		Debug.Log("Cerrando connexión sockets");
-		//enviar mensaje para cerrar la conexión
-		theWriter.Write('Q');
-		theWriter.Flush();
-		theStream.Close();
-		mySocket.Close();
-	}
+		if(socketReady){
+			Debug.Log("Cerrando connexión sockets");
+			//enviar mensaje para cerrar la conexión
+			theWriter.Write('Q');
+			theWriter.Flush();
 
-	public IEnumerator close()
-    {
-		Debug.Log("Cerrando connexión sockets");
-		theWriter.Write('Q');
-		theWriter.Flush();
-		yield return new WaitForSeconds(3f);
-		theStream.Close();
-		mySocket.Close();
+			/*byte[] myReadBuffer = new byte[1024];
+			theStream.Read(myReadBuffer, 0, 2);
+			string mensaje = Encoding.ASCII.GetString(myReadBuffer, 0, 2);
+			Debug.Log("--________---");
+			Debug.Log(mensaje);
+
+			theStream.Close();
+			mySocket.Close();*/
+			socketReady = false;
+		}
 	}
 
 	public void cerrarSockets()
     {
-		StartCoroutine("close");
+		if(socketReady){
+			Debug.Log("Cerrando connexión sockets");
+			//enviar mensaje para cerrar la conexión
+			theWriter.Write('Q');
+			theWriter.Flush();
+			theStream.Close();
+			mySocket.Close();
+			socketReady = false;
+		}
 	}
 
 	public void setupSocket()

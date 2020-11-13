@@ -18,7 +18,7 @@ public class Paper : MonoBehaviour
         width = width / 2;
         minX = -width + 1;
         maxX = width - 1;
-        Debug.Log(minX.ToString() + " " + maxX.ToString());
+        //Debug.Log(minX.ToString() + " " + maxX.ToString());
         var lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         var upperRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         float Left = lowerLeft.x + 5f;
