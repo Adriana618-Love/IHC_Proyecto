@@ -6,6 +6,7 @@ using System.Threading;
 using System.Net.Sockets;
 using System;
 using System.Text;
+using System.Collections.Generic;
 
 public class serverManager : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	String Host = "26.223.87.228";
+	//String Host = "26.162.26.142";
+	String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -26,7 +28,13 @@ public class serverManager : MonoBehaviour
     private GloboController globoController;
 	public VentiladorController ventiladorController;
 
-	// Take a shot immediately
+	//Array de spikes (0->trampolin, 1->spike)
+	public List<char> spikes = new List<char>();
+
+	//Array de cometas
+	public List<int> cometas = new List<int>();
+	public List<int> tipoCometas = new List<int>();
+
 	public void Start()
 	{
 		//GloboController
@@ -116,7 +124,14 @@ public class serverManager : MonoBehaviour
 
 	public void detectMove(string mensaje){
 		if(mensaje != ""){
-			if (mensaje[0] == 'G'){
+			if(mensaje[0] == 'S'){
+				//spikes (0s o 1s)
+				detectSpikes(mensaje);
+			}
+			else if (mensaje[0] == 'C'){
+				detectCometas(mensaje);
+			}
+			else if (mensaje[0] == 'G'){
 				detectGloboMove(mensaje);
 			}
 			else if (mensaje[0] == 'V'){
@@ -143,14 +158,32 @@ public class serverManager : MonoBehaviour
 
 	public void detectVentiladorMove(string mensaje){
 		if (mensaje[1] == 'G'){
-			Debug.Log("Ventilador giro horario");
-			ventiladorController.GirarHorario_();
-		}
-		else if (mensaje[1] == 'H'){
 			Debug.Log("Ventilador giro antihorario");
 			ventiladorController.GirarAntihorario_();
 		}
+		else if (mensaje[1] == 'H'){
+			Debug.Log("Ventilador giro horario");
+			ventiladorController.GirarHorario_();
+		}
 	}
+
+	public void detectSpikes(string mensaje){
+		for(int i = 1; i<mensaje.Length; ++i){
+			spikes.Add(mensaje[i]);
+		}
+	}
+
+	public void detectCometas(string mensaje){
+		string tipoCometa = mensaje.Substring(1, 1);
+		tipoCometas.Add( Int16.Parse(tipoCometa));
+
+		string strNum = mensaje.Substring(2, 2);
+		int num = Int16.Parse(strNum);
+		//normalizar y agregar
+		cometas.Add( num - 18);
+	}
+
+	
 }
 
 
@@ -174,9 +207,9 @@ public class ReadServer
 	}
 	private void read()
 	{
-		byte[] myReadBuffer = new byte[2];
+		byte[] myReadBuffer = new byte[20];
 		string dataFromServer = null;
-		int sizeOfMessage = 2;
+		int sizeOfMessage = 20;
 		while (true)
 		{
 			try
@@ -187,7 +220,6 @@ public class ReadServer
 
 				theStream.Read(myReadBuffer, 0, sizeOfMessage);
 				dataFromServer = System.Text.Encoding.ASCII.GetString(myReadBuffer);
-				//Debug.Log(" >> From server-" + dataFromServer);
 
 				//serverManager_.detectMove(dataFromServer);
 				serverManager_.setMensaje(dataFromServer);

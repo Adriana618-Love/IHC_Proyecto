@@ -1,17 +1,17 @@
 import sys
 import numpy as np
-import cv2
 import socket
 import time
 import sys
 import base64
 from threading import Thread 
+import random
+import time
 
-TCP_IP = "26.223.87.228"
+TCP_IP = "127.0.0.1"
 TCP_PORT = 2000
 
 class ClientThread_globo(Thread): 
-
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
         Thread.__init__(self) 
         self.ip = ip 
@@ -23,7 +23,7 @@ class ClientThread_globo(Thread):
     def run(self): 
         while True : 
             data = self.conn_globo.recv(2) 
-            print ("Server recibio datos:", data)
+            #print ("Server recibio datos:", data)
 
             if(data == b'QQ'):
                 print ("Cerrando conexion con globo")
@@ -44,7 +44,7 @@ class ClientThread_ventilador(Thread):
     def run(self): 
         while True : 
             data = self.conn_ventilador.recv(2) 
-            print ("Server recibio datos:", data)
+            #print ("Server recibio datos:", data)
 
             if(data == b'QQ'):
                 print ("Cerrando conexion con ventilador")
@@ -54,6 +54,70 @@ class ClientThread_ventilador(Thread):
             print ("Server envio datos:", data)
 
 
+class Thread_generadorSPikes(Thread): 
+    def __init__(self, conn_globo, conn_ventilador): 
+        Thread.__init__(self) 
+        self.conn_globo = conn_globo 
+        self.conn_ventilador = conn_ventilador 
+        print ('Generador spikes corriendo.' )
+
+    def run(self): 
+        try:
+            while (True):
+                data = self.generateSpikes()
+                data = bytes(data, 'utf-8')
+                self.conn_globo.sendall(data)
+                self.conn_ventilador.sendall(data)
+                print ("Server envio a ambos datos [spikes]:", data)    
+                # Sleep for a TIME
+                time.sleep(20)
+        except socket.error as msg:
+            print('Sockets cerrados')
+
+    def generateSpikes(self):
+        mensaje = "S"
+        for i in range(19):
+            rand = random.randint(0, 1)
+            if(rand == 0):
+                mensaje += "0"
+            else:
+                mensaje += "1"
+        return mensaje
+
+class Thread_generadorCometas(Thread): 
+    def __init__(self, conn_globo, conn_ventilador): 
+        Thread.__init__(self) 
+        self.conn_globo = conn_globo 
+        self.conn_ventilador = conn_ventilador 
+        print ('Generador spikes corriendo.' )
+
+    def run(self): 
+        try:
+            while (True):
+                data = self.generateCometas()
+                data = bytes(data, 'utf-8')
+                self.conn_globo.sendall(data)
+                self.conn_ventilador.sendall(data)
+                print ("Server envio a ambos datos [cometa]:", data)    
+                # Sleep for a TIME
+                time.sleep(4)
+        except socket.error as msg:
+            print('Sockets cerrados')
+
+    def generateCometas(self):
+        mensaje = "C"
+
+        #seleccionar tipo de cometa
+        rand = random.randint(0, 1)
+        mensaje += str(rand)
+
+        #seleccionar la posicion en X
+        rand = str(random.randint(0, 36))
+        while(len(rand) < 2):
+            rand = '0'+ rand
+        mensaje += str(rand)
+
+        return mensaje
 
 class SocketClass:
     def __init__(self):
@@ -83,33 +147,19 @@ class SocketClass:
         (conn_ventilador, (ip_vent,port_vent)) = self.sock.accept() 
         print ("Ventilador aceptado...") 
         
-        print ("Creando threads...") 
+        print ("Creando threads...")  
         globo_thread = ClientThread_globo(ip_globo,port_globo,conn_globo,conn_ventilador) 
         globo_thread.start() 
         vent_thread = ClientThread_ventilador(ip_vent,port_vent,conn_globo,conn_ventilador) 
         vent_thread.start() 
 
-    """
-    def receiveQuit(self):
-        try:
-            quit = self.conn.recv(1)
-            #print(quit)
-            if(quit == b'Q'):
-                print ('Mensaje de salida recibido', quit)
-                #self.sendMessage('OK')
-                self.sock.close()
-                return True
-            return False
-        except:
-            self.sock.close()
-            return True
+        #spikes
+        spikes_thread = Thread_generadorSPikes(conn_globo,conn_ventilador) 
+        spikes_thread.start()
 
-    
-    def sendMessage(self, message):
-        bMessage = bytes(message, 'utf-8')
-        #base64_bytes = base64.b64encode(bMessage)
-        self.conn.sendall(bMessage)
-    """
+        #cometas
+        cometas_thread = Thread_generadorCometas(conn_globo,conn_ventilador) 
+        cometas_thread.start() 
 
 
 

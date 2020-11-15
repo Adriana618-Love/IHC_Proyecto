@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class FloorController : MonoBehaviour
 {
+    //server manager
+    public serverManager server;
+
     public GameObject Spikes;
     public GameObject Trampolin;
     private float _starTime;
@@ -17,6 +20,7 @@ public class FloorController : MonoBehaviour
     private float _newSpeed;
     private float _timeChange;
     private bool _cutre;
+    private bool startValidator;
 
     private float tramp_prob;
 
@@ -29,6 +33,7 @@ public class FloorController : MonoBehaviour
 
     void Start()
     {
+        startValidator = true;
         _initTime = 6f;
         _starTime = Time.time;
         _intervalTime = 0.5f;
@@ -37,8 +42,6 @@ public class FloorController : MonoBehaviour
         _newSpeed = 0.5f;
         _timeChange = 3f;
         _cutre = true;
-        StartCoroutine("Generator");
-        Debug.Log("Iniciado el Generador");
     }
 
     /*Anotaciones
@@ -47,33 +50,43 @@ public class FloorController : MonoBehaviour
     
     void Update()
     {
-        //Debug.Log("Update");
-        if(Time.time - _starTime >= _intervalTime || _cutre) // Crear algo cada _intervalTime
-        {
-            GameObject Spike;
-            if(Random.value > (1-tramp_prob))
-            {
-                Spike = Instantiate(Trampolin, new Vector2(transform.position.x,transform.position.y+0.5f), Quaternion.identity);
-                TrampolinController spikeScript = Spike.GetComponent<TrampolinController>();
-                spikeScript.direction = Vector2.right;
-                spikeScript.livingTime = _livingTime;
-                spikeScript.speed = _speed;
-                spikeScript.newSpeed = _newSpeed;
-                spikeScript.timeChange = _timeChange;
+        //Debug.Log("Numero de spikes = " + server.spikes.Count);
+        if(server.spikes.Count > 0){
+            if(startValidator){
+                startValidator = false;
+                _starTime = Time.time;
+                StartCoroutine("Generator");
+                Debug.Log("Iniciado el Generador");
             }
-            else
+            else if(Time.time - _starTime >= _intervalTime || _cutre) // Crear algo cada _intervalTime
             {
-                Spike = Instantiate(Spikes, transform.position, Quaternion.identity);
-                SpikesController spikeScript = Spike.GetComponent<SpikesController>();
-                spikeScript.direction = Vector2.right;
-                spikeScript.livingTime = _livingTime;
-                spikeScript.speed = _speed;
-                spikeScript.newSpeed = _newSpeed;
-                spikeScript.timeChange = _timeChange;
+                GameObject Spike;
+                //if(Random.value > (1-tramp_prob))
+                if(server.spikes[0] == '0')
+                {
+                    Spike = Instantiate(Trampolin, new Vector2(transform.position.x,transform.position.y+0.5f), Quaternion.identity);
+                    TrampolinController spikeScript = Spike.GetComponent<TrampolinController>();
+                    spikeScript.direction = Vector2.right;
+                    spikeScript.livingTime = _livingTime;
+                    spikeScript.speed = _speed;
+                    spikeScript.newSpeed = _newSpeed;
+                    spikeScript.timeChange = _timeChange;
+                }
+                else
+                {
+                    Spike = Instantiate(Spikes, transform.position, Quaternion.identity);
+                    SpikesController spikeScript = Spike.GetComponent<SpikesController>();
+                    spikeScript.direction = Vector2.right;
+                    spikeScript.livingTime = _livingTime;
+                    spikeScript.speed = _speed;
+                    spikeScript.newSpeed = _newSpeed;
+                    spikeScript.timeChange = _timeChange;
+                }
+                _starTime = Time.time;
+                _timeChange = Mathf.Max(0,_timeChange-0.3f);
+                _cutre = false;
+                server.spikes.RemoveAt(0);
             }
-            _starTime = Time.time;
-            _timeChange = Mathf.Max(0,_timeChange-0.3f);
-            _cutre = false;
         }
     }
 
@@ -81,7 +94,7 @@ public class FloorController : MonoBehaviour
     {
 
         yield return new WaitForSeconds(5.5f);
-        Debug.Log("Paso el tiempo inicial" + (Time.time - _starTime) + "-" + _initTime );
+        //Debug.Log("Paso el tiempo inicial" + (Time.time - _starTime) + "-" + _initTime );
         _intervalTime = 5f;
         _livingTime = 60;
         _speed = 0.5f;
