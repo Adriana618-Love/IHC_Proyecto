@@ -29,6 +29,7 @@ public class FloorController : MonoBehaviour
     private void Awake()
     {
         tramp_prob = Configs.configuraciones.tram_prob;
+        server = serverManager._server_;
     }
 
     void Start()
@@ -50,7 +51,7 @@ public class FloorController : MonoBehaviour
     
     void Update()
     {
-        //Debug.Log("Numero de spikes = " + server.spikes.Count);
+        Debug.Log("Numero de spikes = " + server.spikes.Count);
         if(server.spikes.Count > 0){
             if(startValidator){
                 startValidator = false;

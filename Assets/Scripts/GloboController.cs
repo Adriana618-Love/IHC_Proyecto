@@ -44,7 +44,7 @@ public class GloboController : MonoBehaviour
         //static_speed = Configs.configuraciones.speed_globo;
 
         //server manager
-        server = serverManager_.GetComponent<serverManager>();
+        server = serverManager._server_;
     }
 
     void Start()

@@ -7,10 +7,12 @@ using System.Net.Sockets;
 using System;
 using System.Text;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class serverManager : MonoBehaviour
 {
-    internal Boolean socketReady = false;
+	public static serverManager _server_;
+	internal Boolean socketReady = false;
 
 	public TcpClient mySocket;
 	NetworkStream theStream;
@@ -28,6 +30,8 @@ public class serverManager : MonoBehaviour
     private GloboController globoController;
 	public VentiladorController ventiladorController;
 
+	public GameObject GameLord;
+
 	//Array de spikes (0->trampolin, 1->spike)
 	public List<char> spikes = new List<char>();
 
@@ -35,11 +39,34 @@ public class serverManager : MonoBehaviour
 	public List<int> cometas = new List<int>();
 	public List<int> tipoCometas = new List<int>();
 
+	private void Awake()
+	{
+		if (_server_ == null)
+		{
+			_server_ = this;
+			DontDestroyOnLoad(this.gameObject);
+		}
+		else if (_server_ != this)
+		{
+			Destroy(this.gameObject);
+		}
+	}
+
+	public void Contextualizar()
+    {
+		GloboController_ = GameObject.Find("Balloon");
+		globoController = GloboController_.GetComponent<GloboController>();
+		ventiladorController = GameObject.Find("Ventilador").GetComponent<VentiladorController>();
+		GameLord = GameObject.Find("GameLord");
+	}
+
 	public void Start()
 	{
 		//GloboController
-        globoController = GloboController_.GetComponent<GloboController>();
-
+		if (GloboController_ != null)
+		{
+			globoController = GloboController_.GetComponent<GloboController>();
+		}
 		StartCoroutine("intentarConectar");
 	}
 
@@ -52,8 +79,22 @@ public class serverManager : MonoBehaviour
 		}
 	}
 
-	
-    IEnumerator intentarConectar()
+	public void redirectScene(string mensaje)
+	{
+		string sceneName;
+        if (mensaje[1] == 'G')
+        {
+			sceneName = "Main";
+        }
+        else
+        {
+			sceneName = "Main_vent";
+        }
+		SceneManager.LoadScene(sceneName);
+	}
+
+
+	IEnumerator intentarConectar()
     {
 		Debug.Log("Intentando conectar al serverManager..");
         //intentar conectar con el server
@@ -63,7 +104,7 @@ public class serverManager : MonoBehaviour
 			//enviar mensaje para confirmar la conexión con el server
 			/*theWriter.Write('Y');
 			theWriter.Flush();*/
-			
+			GameLord.GetComponent<GameLord>().Iniciar();
 			//inicializar thread de lectura
 			readServer = new ReadServer();
 			readServer.readServer(mySocket, theStream, this);
@@ -137,6 +178,14 @@ public class serverManager : MonoBehaviour
 			else if (mensaje[0] == 'V'){
 				detectVentiladorMove(mensaje);
 			}
+			else if(mensaje[0] == 'A')
+            {
+				redirectScene(mensaje);
+            }
+			else if(mensaje[0] == 'E')
+            {
+				GameLord.GetComponent<GameLord>().Iniciar();
+            }
 		}
 	}
 	

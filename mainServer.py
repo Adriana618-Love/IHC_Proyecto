@@ -10,6 +10,7 @@ import time
 
 TCP_IP = "127.0.0.1"
 TCP_PORT = 2000
+TCP_IP2 = "26.162.26.142"
 
 class ClientThread_globo(Thread): 
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
@@ -127,9 +128,13 @@ class SocketClass:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         print('Socket creado')
+
+        self.sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock2.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         
         try:
             self.sock.bind((TCP_IP, TCP_PORT))
+            self.sock2.bind((TCP_IP2, TCP_PORT))
             print('Socket bind complete')
         except socket.error as msg:
             print('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
@@ -138,14 +143,27 @@ class SocketClass:
         #leyendo cliente globo
         self.sock.listen(4) 
         print ("Esperando cliente globo...") 
-        (conn_globo, (ip_globo,port_globo)) = self.sock.accept() 
+        (conn_globo, (ip_globo,port_globo)) = self.sock.accept()
+        ##Enviando mensaje al globo
+        data = "AG"
+        data = bytes(data, 'utf-8')
+        conn_globo.sendall(data)
         print ("Globo aceptado...") 
         
         #leyendo cliente ventilador
-        self.sock.listen(4) 
+        self.sock2.listen(4) 
         print ("Esperando cliente ventilador...") 
-        (conn_ventilador, (ip_vent,port_vent)) = self.sock.accept() 
-        print ("Ventilador aceptado...") 
+        (conn_ventilador, (ip_vent,port_vent)) = self.sock2.accept()
+        ##Enviando mensaje al ventilador
+        data = "AV"
+        data = bytes(data, 'utf-8')
+        conn_ventilador.sendall(data)
+        print ("Ventilador aceptado...")
+        #Enviando mensaje a los Dos
+        data = "E"
+        data = bytes(data, 'utf-8')
+        conn_ventilador.sendall(data)
+        conn_globo.sendall(data)
         
         print ("Creando threads...")  
         globo_thread = ClientThread_globo(ip_globo,port_globo,conn_globo,conn_ventilador) 

@@ -15,6 +15,7 @@ public class CometaGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        server = serverManager._server_;
         _init_time = Time.time;
         Camera cam = Camera.main;
         float height = 2f * cam.orthographicSize;
