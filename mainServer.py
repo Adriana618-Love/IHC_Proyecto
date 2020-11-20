@@ -160,10 +160,11 @@ class SocketClass:
         conn_ventilador.sendall(data)
         print ("Ventilador aceptado...")
         #Enviando mensaje a los Dos
-        data = "E"
+        data = "EE"
         data = bytes(data, 'utf-8')
-        conn_ventilador.sendall(data)
         conn_globo.sendall(data)
+        conn_ventilador.sendall(data)
+        
         
         print ("Creando threads...")  
         globo_thread = ClientThread_globo(ip_globo,port_globo,conn_globo,conn_ventilador) 

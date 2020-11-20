@@ -19,7 +19,7 @@ public class GameLord : MonoBehaviour
 
     public void Iniciar()
     {
-        for(int i = 0; i < elements_of_game.Length; ++i)
+        for (int i = 0; i < elements_of_game.Length; ++i)
         {
             elements_of_game[i].SetActive(true);
         }

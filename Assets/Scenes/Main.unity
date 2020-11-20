@@ -2922,6 +2922,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: serverManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2987744421796940792, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2987744421796940793, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
       propertyPath: GloboController_
       value: 

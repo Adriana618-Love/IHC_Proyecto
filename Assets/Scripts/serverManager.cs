@@ -41,7 +41,6 @@ public class serverManager : MonoBehaviour
 
 	private void Awake()
 	{
-		GameLord = null;
 		if (_server_ == null)
 		{
 			_server_ = this;
@@ -109,6 +108,7 @@ public class serverManager : MonoBehaviour
 			//enviar mensaje para confirmar la conexión con el server
 			/*theWriter.Write('Y');
 			theWriter.Flush();*/
+			GameLord.GetComponent<GameLord>().Iniciar();
 			//inicializar thread de lectura
 			readServer = new ReadServer();
 			readServer.readServer(mySocket, theStream, this);
@@ -169,7 +169,7 @@ public class serverManager : MonoBehaviour
 
 	public void detectMove(string mensaje){
 		if(mensaje != ""){
-			print(mensaje);
+			print("mensaje"+mensaje);
 			if(mensaje[0] == 'S'){
 				//spikes (0s o 1s)
 				detectSpikes(mensaje);
@@ -186,12 +186,14 @@ public class serverManager : MonoBehaviour
 			else if(mensaje[0] == 'A')
             {
 				Debug.Log("Redirigiendo");
-				redirectScene(mensaje);
+				//GameLord.GetComponent<GameLord>().Iniciar();
+				//redirectScene(mensaje);
             }
 			else if(mensaje[0] == 'E')
             {
 				Debug.Log("Empezar");
-				GameLord.GetComponent<GameLord>().Iniciar();
+				
+				//_server_.Contextualizar();
             }
 		}
 	}
