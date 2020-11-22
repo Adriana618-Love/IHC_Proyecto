@@ -10,7 +10,7 @@ import time
 
 TCP_IP = "127.0.0.1"
 TCP_PORT = 2000
-TCP_IP2 = "26.162.26.142"
+TCP_IP2 = "127.0.0.1"
 
 class ClientThread_globo(Thread): 
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
@@ -147,7 +147,7 @@ class SocketClass:
         ##Enviando mensaje al globo
         data = "AG"
         data = bytes(data, 'utf-8')
-        conn_globo.sendall(data)
+        print("Globo",conn_globo.sendall(data))
         print ("Globo aceptado...") 
         
         #leyendo cliente ventilador
@@ -157,13 +157,16 @@ class SocketClass:
         ##Enviando mensaje al ventilador
         data = "AV"
         data = bytes(data, 'utf-8')
-        conn_ventilador.sendall(data)
+        print("ventilador",conn_ventilador.sendall(data))
         print ("Ventilador aceptado...")
+        #Esperando 5 segundos
+        time.sleep(5)
+        
         #Enviando mensaje a los Dos
         data = "EE"
         data = bytes(data, 'utf-8')
         conn_globo.sendall(data)
-        conn_ventilador.sendall(data)
+        print("Resultado",conn_ventilador.sendall(data))
         
         
         print ("Creando threads...")  

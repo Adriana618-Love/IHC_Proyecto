@@ -10,18 +10,19 @@ GameObject:
   m_Component:
   - component: {fileID: 1173824094499986169}
   - component: {fileID: 1173824094499986174}
-  - component: {fileID: 1173824094499986168}
   - component: {fileID: -7567641823457537752}
   - component: {fileID: 4157639410498669855}
   - component: {fileID: 448998276}
   - component: {fileID: 448998275}
+  - component: {fileID: 448998278}
+  - component: {fileID: 3572566727059065848}
   m_Layer: 0
   m_Name: Balloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1173824094499986169
 Transform:
   m_ObjectHideFlags: 0
@@ -87,29 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1173824094499986168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173824094499986175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e319d24e3b6a2c74cb1bb19b771f19b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
-  direction: {x: 0, y: 0}
-  explosion: {fileID: -7484998131964722413, guid: 14750a9d4afa8874e90ec2860c29f06d, type: 3}
-  pausa_object: {fileID: 0}
-  minY: 0.3
-  initPos: {x: 0, y: 0}
-  static_speed: 0
-  screen_capture: {fileID: 0}
-  sounds: []
-  trampolinAudio: {fileID: 0}
-  estallandoAudio: {fileID: 0}
 --- !u!50 &-7567641823457537752
 Rigidbody2D:
   serializedVersion: 4
@@ -129,7 +107,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &4157639410498669855
 CircleCollider2D:
@@ -339,3 +317,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &448998278
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173824094499986175}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a379b71001dd4a4ca7a9e3fb83a5ba8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3572566727059065848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173824094499986175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e319d24e3b6a2c74cb1bb19b771f19b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverManager_: {fileID: 0}
+  speed: 0
+  direction: {x: 0, y: 0}
+  explosion: {fileID: -858364968387735833, guid: 2c7ab61d5aea053469cdc0a6b5dbe852, type: 3}
+  pausa_object: {fileID: 0}
+  minY: 0
+  initPos: {x: 0, y: 0}
+  static_speed: 0
+  screen_capture: {fileID: 0}
+  sounds: []
+  trampolinAudio: {fileID: 0}
+  estallandoAudio: {fileID: 0}

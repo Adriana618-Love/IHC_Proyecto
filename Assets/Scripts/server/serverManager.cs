@@ -24,6 +24,7 @@ public class serverManager : MonoBehaviour
 	ReadServer readServer;
 
 	private string mensaje = "";
+	public string rol = "";
 
 	//GloboController
 	public GameObject GloboController_;
@@ -54,14 +55,17 @@ public class serverManager : MonoBehaviour
 
 	public void Contextualizar()
     {
-		GloboController_ = GameObject.Find("Balloon");
+		GameObject Game = GameObject.Find("Game");
+		GloboController_ = Game.transform.Find("Balloon").gameObject;
 		globoController = GloboController_.GetComponent<GloboController>();
-		ventiladorController = GameObject.Find("Ventilador").GetComponent<VentiladorController>();
+		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorController>();
 		GameLord = GameObject.Find("GameLord");
+		GameLord.GetComponent<GameLord>().Iniciar();
 	}
 
 	public void Start()
 	{
+		rol = "N";
 		//GloboController
 		if (GloboController_ != null)
 		{
@@ -108,7 +112,6 @@ public class serverManager : MonoBehaviour
 			//enviar mensaje para confirmar la conexión con el server
 			/*theWriter.Write('Y');
 			theWriter.Flush();*/
-			GameLord.GetComponent<GameLord>().Iniciar();
 			//inicializar thread de lectura
 			readServer = new ReadServer();
 			readServer.readServer(mySocket, theStream, this);
@@ -185,15 +188,13 @@ public class serverManager : MonoBehaviour
 			}
 			else if(mensaje[0] == 'A')
             {
-				Debug.Log("Redirigiendo");
-				//GameLord.GetComponent<GameLord>().Iniciar();
-				//redirectScene(mensaje);
+				Debug.Log("Rol establecido");
+				rol = mensaje;
             }
 			else if(mensaje[0] == 'E')
             {
 				Debug.Log("Empezar");
-				
-				//_server_.Contextualizar();
+				redirectScene(mensaje);
             }
 		}
 	}
