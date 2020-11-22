@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Inicio.unity
     guid: a4d642870eab8d944bc0c972a020c6a5
+  - enabled: 1
+    path: Assets/Scenes/Main_vent.unity
+    guid: 2e6e45db96410ec4d9d6a6bc831c1032
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

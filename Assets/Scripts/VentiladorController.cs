@@ -37,14 +37,13 @@ public class VentiladorController : MonoBehaviour
 
     private void Awake()
     {
-        sounds = GetComponents<AudioSource>();
-        estallandoAudio = sounds[0];
-        trampolinAudio = sounds[1];
-        animator = this.GetComponent<Animator>();
+        //sounds = GetComponents<AudioSource>();
+        //estallandoAudio = sounds[0];
+        //trampolinAudio = sounds[1];
+        //animator = this.GetComponent<Animator>();
         //static_speed = Configs.configuraciones.speed_globo;
 
-        //server manager
-        server = serverManager_.GetComponent<serverManager>();
+        
     }
 
     void Start()
@@ -52,7 +51,8 @@ public class VentiladorController : MonoBehaviour
         initPos = this.transform.position;
         direction = new Vector2(4, -4);
         speed = static_speed;
-
+        //server manager
+        server = serverManager._server_;
         /*actions.Add("izquierda", GirarAntihorario);
         actions.Add("derecha", GirarHorario);
 

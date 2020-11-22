@@ -2535,7 +2535,7 @@ PrefabInstance:
     - target: {fileID: 2987744421796940793, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
       propertyPath: GloboController_
       value: 
-      objectReference: {fileID: 448998274}
+      objectReference: {fileID: 0}
     - target: {fileID: 2987744421796940793, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
       propertyPath: ventiladorController
       value: 
@@ -2888,6 +2888,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5837350656504101715, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
+      propertyPath: screen_capture
+      value: 
+      objectReference: {fileID: 757391769}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
 --- !u!4 &7150790643012572213 stripped
