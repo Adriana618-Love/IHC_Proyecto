@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BallonSpikesController : MonoBehaviour
 {
+    //server manager
+    public serverManager server;
+
     public int maxBallons;
     public GameObject[] ballons;
     private int _index;
@@ -12,6 +15,7 @@ public class BallonSpikesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        server = serverManager._server_;
         cam = new Camara();
         maxBallons = 4;
         ballons = new GameObject[maxBallons];
@@ -30,9 +34,20 @@ public class BallonSpikesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(server.ballonSpikes.Count > 0){
+            int positionX = server.ballonSpikes[0].Key;
+            int positionY = server.ballonSpikes[0].Value;
+
+            transform.position = new Vector2(positionX, positionY);
+            Instantiate(BALLON, transform.position, Quaternion.identity);
+
+            server.ballonSpikes.RemoveAt(0);
+        }
+        /*
         if(maxBallons > 0)
         {
             GenerateBallon();
         }
+        */
     }
 }

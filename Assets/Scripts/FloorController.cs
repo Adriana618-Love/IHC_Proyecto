@@ -41,7 +41,7 @@ public class FloorController : MonoBehaviour
         _livingTime = 50;
         _speed = 8;
         _newSpeed = 0.5f;
-        _timeChange = 3f;
+        _timeChange = 6f;
         _cutre = true;
     }
 
@@ -51,7 +51,7 @@ public class FloorController : MonoBehaviour
     
     void Update()
     {
-        Debug.Log("Numero de spikes = " + server.spikes.Count);
+        //Debug.Log("Numero de spikes = " + server.spikes.Count);
         if(server.spikes.Count > 0){
             if(startValidator){
                 startValidator = false;
@@ -94,7 +94,7 @@ public class FloorController : MonoBehaviour
     private IEnumerator Generator()
     {
 
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(10.5f);
         //Debug.Log("Paso el tiempo inicial" + (Time.time - _starTime) + "-" + _initTime );
         _intervalTime = 5f;
         _livingTime = 60;

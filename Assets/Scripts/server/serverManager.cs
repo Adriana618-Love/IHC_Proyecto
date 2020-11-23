@@ -40,6 +40,9 @@ public class serverManager : MonoBehaviour
 	public List<int> cometas = new List<int>();
 	public List<int> tipoCometas = new List<int>();
 
+	//array de ballonSpikes
+	public List<KeyValuePair<int, int>> ballonSpikes = new List<KeyValuePair<int, int>>();
+
 	private void Awake()
 	{
 		if (_server_ == null)
@@ -86,21 +89,6 @@ public class serverManager : MonoBehaviour
 			mensaje = "";
 		}
 	}
-
-	public void redirectScene(string mensaje)
-	{
-		string sceneName;
-        if (mensaje[1] == 'G')
-        {
-			sceneName = "Main";
-        }
-        else
-        {
-			sceneName = "Main_vent";
-        }
-		SceneManager.LoadScene(sceneName);
-	}
-
 
 	IEnumerator intentarConectar()
     {
@@ -172,13 +160,16 @@ public class serverManager : MonoBehaviour
 
 	public void detectMove(string mensaje){
 		if(mensaje != ""){
-			print("mensaje"+mensaje);
+			//print("mensaje"+mensaje);
 			if(mensaje[0] == 'S'){
 				//spikes (0s o 1s)
 				detectSpikes(mensaje);
 			}
 			else if (mensaje[0] == 'C'){
 				detectCometas(mensaje);
+			}
+			else if (mensaje[0] == 'B'){
+				detectBalloonSpikes(mensaje);
 			}
 			else if (mensaje[0] == 'G'){
 				detectGloboMove(mensaje);
@@ -188,8 +179,7 @@ public class serverManager : MonoBehaviour
 			}
 			else if(mensaje[0] == 'A')
             {
-				Debug.Log("Rol establecido");
-				rol = mensaje;
+				setRol(mensaje);
             }
 			else if(mensaje[0] == 'E')
             {
@@ -198,7 +188,34 @@ public class serverManager : MonoBehaviour
             }
 		}
 	}
-	
+
+	public void redirectScene(string mensaje)
+	{
+		//roles: G o V
+		string sceneName = "";
+
+        if (rol == "G")
+        {
+			sceneName = "Main";
+        }
+        else
+        {
+			sceneName = "Main_vent";
+        }
+
+		SceneManager.LoadScene(sceneName);
+	}
+
+
+	public void setRol(string mensaje){
+		//roles: G o V
+		rol = Char.ToString(mensaje[1]);
+
+		/*if(mensaje[0] ==  'G'){
+			//si es el globo, enviar seteo de dificultad al server
+
+		}*/
+	}
 
 	public void detectGloboMove(string mensaje){
 		if (mensaje[1] == 'I'){
@@ -242,6 +259,13 @@ public class serverManager : MonoBehaviour
 		cometas.Add( num - 18);
 	}
 
+	public void detectBalloonSpikes(string mensaje){
+		string posX = mensaje.Substring(1, 2);
+		string posY = mensaje.Substring(3, 2);
+		var pair = new KeyValuePair<int, int>( Int16.Parse(posX) - 18,  Int16.Parse(posY) - 8);
+		ballonSpikes.Add( pair );
+	}
+
 	
 }
 
@@ -266,9 +290,9 @@ public class ReadServer
 	}
 	private void read()
 	{
-		byte[] myReadBuffer = new byte[20];
+		byte[] myReadBuffer = new byte[26];
 		string dataFromServer = null;
-		int sizeOfMessage = 20;
+		int sizeOfMessage = 26;
 		while (true)
 		{
 			try
