@@ -2892,7 +2892,8 @@ PrefabInstance:
       propertyPath: screen_capture
       value: 
       objectReference: {fileID: 757391769}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5837350656504101715, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
 --- !u!4 &7150790643012572213 stripped
 Transform:
@@ -2904,3 +2905,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3845702911875097239, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
   m_PrefabInstance: {fileID: 7150790643012572212}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7150790643012572215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150790643012572214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b507dfeca331e2d43be93bffc7e052f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverManager_: {fileID: 0}
+  speed: 0
+  direction: {x: 0, y: 0}
+  explosion: {fileID: 0}
+  pausa_object: {fileID: 0}
+  minY: 0
+  initPos: {x: 0, y: 0}
+  static_speed: 0
+  screen_capture: {fileID: 0}

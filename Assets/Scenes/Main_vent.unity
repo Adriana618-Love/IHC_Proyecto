@@ -504,6 +504,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1173824094499986175, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
   m_PrefabInstance: {fileID: 1173824094403326333}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &448998275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448998274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4dd8ff871c85f4d9d4f73f6fa421e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverManager_: {fileID: 0}
+  speed: 0
+  direction: {x: 0, y: 0}
+  explosion: {fileID: 0}
+  pausa_object: {fileID: 0}
+  minY: 0
+  initPos: {x: 0, y: 0}
+  static_speed: 0
+  screen_capture: {fileID: 0}
+  sounds: []
+  trampolinAudio: {fileID: 0}
+  estallandoAudio: {fileID: 0}
 --- !u!95 &448998278
 Animator:
   serializedVersion: 3
@@ -2762,7 +2786,8 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3572566727059065848, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
 --- !u!4 &1173824094403326334 stripped
 Transform:
