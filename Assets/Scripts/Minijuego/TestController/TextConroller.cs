@@ -21,10 +21,10 @@ public class TextConroller : MonoBehaviour
 
     IEnumerator checkRol()
     {
-        if(serverManager._server_.rol[0] != 'N')
+        if(serverManager._server_.rol != "N")
         {
             string myRol = "";
-            if (serverManager._server_.rol[1] == 'G') myRol = "Globo";
+            if (serverManager._server_.rol == "G") myRol = "Globo";
             else myRol = "Ventilador";
             text.text = "Rol Asignado: "+myRol;
         }

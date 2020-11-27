@@ -1754,13 +1754,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1207124261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a9fabe852e2ba149be955ff4fac942f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d221fb3323817540afdbee4444e460d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   screencapture_: {fileID: 757391769}
   texto: {fileID: 1108368983}
   jumboTron: {fileID: 1455815622}
-  Ballon: {fileID: 448998274}
+  Ventilador: {fileID: 2039201447}
   maxMoves: 1000000000
   count: 0
   welldonemsg: {fileID: 7473532264331271119, guid: 5383d572bfe9d72418df1023831490a3, type: 3}

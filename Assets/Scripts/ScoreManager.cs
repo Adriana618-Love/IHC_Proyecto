@@ -79,7 +79,7 @@ public class ScoreManager : MonoBehaviour
     IEnumerator TheLast()
     {
         CloseCamera();
-        ballon.GetComponent<GloboController>().ES(); //Centro el globo
+        ballon.GetComponent<GloboSlave>().ES(); //Centro el globo
         score.GetComponent<Animator>().SetTrigger("win");
         
         while (ballon.transform.position.y > 0.2f || ballon.transform.position.y < -0.2f) { 

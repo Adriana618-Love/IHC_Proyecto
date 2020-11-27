@@ -18,8 +18,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	//String Host = "26.162.26.142";
-	String Host = "127.0.0.1";
+	String Host = "26.162.26.142";
+	//String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -28,8 +28,8 @@ public class serverManager : MonoBehaviour
 
 	//GloboController
 	public GameObject GloboController_;
-    private GloboController globoController;
-	public VentiladorController ventiladorController;
+    private GloboSlave globoController;
+	public VentiladorSlave ventiladorController;
 
 	public GameObject GameLord;
 
@@ -60,8 +60,8 @@ public class serverManager : MonoBehaviour
     {
 		GameObject Game = GameObject.Find("Game");
 		GloboController_ = Game.transform.Find("Balloon").gameObject;
-		globoController = GloboController_.GetComponent<GloboController>();
-		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorController>();
+		globoController = GloboController_.GetComponent<GloboSlave>();
+		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorSlave>();
 		GameLord = GameObject.Find("GameLord");
 		GameLord.GetComponent<GameLord>().Iniciar();
 	}
@@ -72,7 +72,7 @@ public class serverManager : MonoBehaviour
 		//GloboController
 		if (GloboController_ != null)
 		{
-			globoController = GloboController_.GetComponent<GloboController>();
+			globoController = GloboController_.GetComponent<GloboSlave>();
 		}
 		if(GameLord != null)
         {
@@ -160,6 +160,8 @@ public class serverManager : MonoBehaviour
 
 	public void detectMove(string mensaje){
 		if(mensaje != ""){
+			Debug.Log("mensaje recibido: " + mensaje);
+
 			//print("mensaje"+mensaje);
 			if(mensaje[0] == 'S'){
 				//spikes (0s o 1s)
@@ -172,9 +174,11 @@ public class serverManager : MonoBehaviour
 				detectBalloonSpikes(mensaje);
 			}
 			else if (mensaje[0] == 'G'){
+				Debug.Log("mensaje globo: " + mensaje);
 				detectGloboMove(mensaje);
 			}
 			else if (mensaje[0] == 'V'){
+				Debug.Log("mensaje ventilador: " + mensaje);
 				detectVentiladorMove(mensaje);
 			}
 			else if(mensaje[0] == 'A')
@@ -210,7 +214,7 @@ public class serverManager : MonoBehaviour
 	public void setRol(string mensaje){
 		//roles: G o V
 		rol = Char.ToString(mensaje[1]);
-
+		Debug.Log(rol);
 		/*if(mensaje[0] ==  'G'){
 			//si es el globo, enviar seteo de dificultad al server
 
@@ -240,6 +244,18 @@ public class serverManager : MonoBehaviour
 		else if (mensaje[1] == 'H'){
 			Debug.Log("Ventilador giro horario");
 			ventiladorController.GirarHorario_();
+		}
+		else if (mensaje[1] == 'A'){
+			ventiladorController.Elevar_();
+		}
+		else if (mensaje[1] == 'B'){
+			ventiladorController.Bajar_();
+		}
+		else if (mensaje[1] == 'L'){
+			ventiladorController.Left_();
+		}
+		else if (mensaje[1] == 'R'){
+			ventiladorController.Right_();
 		}
 	}
 

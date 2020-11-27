@@ -36,6 +36,25 @@ public class VentiladorSlave : MonoBehaviour
         server = serverManager._server_;
     }
 
+    //Elevar
+    public void Elevar_(){
+        transform.Translate(0, 2, 0);
+    }
+
+    //Bajar
+    public void Bajar_(){
+        transform.Translate(0, 2, 0);
+    }
+    //Left
+    public void Left_(){
+        transform.Translate(-2, 0, 0);
+    }
+
+    //Right
+    public void Right_(){
+        transform.Translate(2, 0, 0);
+    }
+
     public void GirarAntihorario_()
     {
         transform.Rotate(Vector3.back * 90);

@@ -41,7 +41,7 @@ public class VentiladorController : MonoBehaviour
         //estallandoAudio = sounds[0];
         //trampolinAudio = sounds[1];
         //animator = this.GetComponent<Animator>();
-        //static_speed = Configs.configuraciones.speed_globo;
+        static_speed = Configs.configuraciones.speed_globo;
 
         
     }
@@ -53,15 +53,15 @@ public class VentiladorController : MonoBehaviour
         speed = static_speed;
         //server manager
         server = serverManager._server_;
-        /*actions.Add("izquierda", GirarAntihorario);
-        actions.Add("derecha", GirarHorario);
+        actions.Add("arriba", Elevar);
+        actions.Add("abajo", Bajar);
 
         actions.Add("pausa", Stop);
         actions.Add("menu", Menu);
 
         _keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         _keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
-        _keywordRecognizer.Start();*/
+        _keywordRecognizer.Start();
     }
 
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech)
@@ -70,6 +70,51 @@ public class VentiladorController : MonoBehaviour
         actions[speech.text].Invoke();
     }
 
+    //Elevar
+    public void Elevar_(){
+        transform.Translate(0, 2, 0);
+    }
+
+    public void Elevar()
+    {
+        Elevar_();
+        server.write("VA");
+    }
+
+    //Bajar
+    public void Bajar_(){
+        transform.Translate(0, 2, 0);
+    }
+    
+    public void Bajar()
+    {
+        Bajar_();
+        server.write("VB");
+    }
+
+    //Left
+    public void Left_(){
+        transform.Translate(-2, 0, 0);
+    }
+
+    public void Left()
+    {
+        Left_();
+        server.write("VI");
+    }
+
+    //Right
+    public void Right_(){
+        transform.Translate(2, 0, 0);
+    }
+
+    public void Right()
+    {
+        Right_();
+        server.write("VD");
+    }
+
+    //GirarAntihorario
     public void GirarAntihorario_(){
         transform.Rotate (Vector3.back * 90);
     }
@@ -80,13 +125,13 @@ public class VentiladorController : MonoBehaviour
         server.write("VG");
     }
 
+    //GirarHorario
     public void GirarHorario_(){
         transform.Rotate (Vector3.forward * 90);
     }
 
     public void GirarHorario()
     {
-        //Debug.Log("derecha");
         GirarHorario_();
         server.write("VH");
     }
@@ -112,13 +157,7 @@ public class VentiladorController : MonoBehaviour
         SceneManager.LoadScene("menuScene");
     }
 
-    public IEnumerator Elevate()
-    {
-        speed = static_speed;
-        direction.y = 4;
-        yield return new WaitForSeconds(3f);
-        direction.y = -4;
-    }
+
     public IEnumerator ElevateSimple()
     {
         if (this.transform.position.y < 0)
@@ -147,17 +186,7 @@ public class VentiladorController : MonoBehaviour
         StartCoroutine("ElevateSimple");
     }
 
-    public void Elevar_(){
-        StartCoroutine("Elevate");
-    }
 
-
-    public void Elevar()
-    {
-        //Debug.Log("elevar");
-        Elevar_();
-        server.write("GA");
-    }
     
     public void SetInit()
     {
@@ -210,4 +239,34 @@ public class VentiladorController : MonoBehaviour
             Menu();
         }
     }
+
+    //funcion llamada por staticOrderingManVent
+    public bool DetectarMovimiento(string[] moves, int numMoves)
+	{
+
+		for (int i = 0; i < numMoves; i++)
+		{
+            string move = moves[i];
+
+            if (move == "BI")
+            {//BI
+                GirarAntihorario();
+            }
+            else if (move == "BD")
+            {//BD
+                GirarHorario();
+            }
+            else if (move == "PI")
+            {//PI
+                //left
+            }
+            else if (move == "PD")
+            {//PD
+                //right
+
+            }
+
+		}
+		return false;
+	}
 }

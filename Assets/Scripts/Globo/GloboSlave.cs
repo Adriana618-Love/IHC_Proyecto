@@ -8,10 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class GloboSlave : MonoBehaviour
 {
-    //server manager
-    public GameObject serverManager_;
-    private serverManager server;
-
     public float speed;
     public Vector2 direction;
     public Sprite explosion;
@@ -21,19 +17,12 @@ public class GloboSlave : MonoBehaviour
 
     public float static_speed;
 
-    [SerializeField]
-    public screencapture screen_capture;
-
     public AudioSource[] sounds;
     public AudioSource trampolinAudio;
     public AudioSource estallandoAudio;
     private Animator animator;
 
     private int _status; /*-1 => Exploto, 0 => Nada, 1 => Rebote*/
-
-    private KeywordRecognizer _keywordRecognizer;
-    private Dictionary<string, Action> actions = new Dictionary<string, Action>();
-    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -42,9 +31,6 @@ public class GloboSlave : MonoBehaviour
         trampolinAudio = sounds[1];
         animator = this.GetComponent<Animator>();
         //static_speed = Configs.configuraciones.speed_globo;
-
-        //server manager
-        server = serverManager._server_;
     }
 
     void Start()
