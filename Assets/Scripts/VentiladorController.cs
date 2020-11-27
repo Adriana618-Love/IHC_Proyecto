@@ -27,8 +27,8 @@ public class VentiladorController : MonoBehaviour
 
     public GameObject Up;//1
     public GameObject Down;//3
-    public GameObject Left;//2
-    public GameObject Right;//0
+    public GameObject Left_dir;//2
+    public GameObject Right_dir;//0
 
     private int dir = 0;
 
@@ -152,8 +152,8 @@ public class VentiladorController : MonoBehaviour
     private void DeactivateAll()
     {
         Up.SetActive(false);
-        Right.SetActive(false);
-        Left.SetActive(false);
+        Right_dir.SetActive(false);
+        Left_dir.SetActive(false);
         Down.SetActive(false);
     }
 
@@ -162,7 +162,7 @@ public class VentiladorController : MonoBehaviour
         DeactivateAll();
         if (dir == 0)
         {
-            Right.SetActive(true);
+            Right_dir.SetActive(true);
         }
         else if (dir == 1)
         {
@@ -170,7 +170,7 @@ public class VentiladorController : MonoBehaviour
         }
         else if (dir == 2)
         {
-            Left.SetActive(true);
+            Left_dir.SetActive(true);
         }
         else if (dir == 3)
         {
