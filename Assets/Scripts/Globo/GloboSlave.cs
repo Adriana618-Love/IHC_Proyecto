@@ -37,6 +37,7 @@ public class GloboSlave : MonoBehaviour
     {
         initPos = this.transform.position;
         direction = new Vector2(4, -4);
+        static_speed = 4;
         speed = static_speed;
     }
 

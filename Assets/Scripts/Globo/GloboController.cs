@@ -51,7 +51,7 @@ public class GloboController : MonoBehaviour
     {
         initPos = this.transform.position;
         direction = new Vector2(4, -4);
-        static_speed = 10;
+        static_speed = 4;
         speed = static_speed;
 
         /*actions.Add("izquierda", Left);
