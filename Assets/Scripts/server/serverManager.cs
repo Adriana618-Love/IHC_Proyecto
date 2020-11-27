@@ -323,8 +323,10 @@ public class ReadServer
 				theStream.Read(myReadBuffer, 0, sizeOfMessage);
 				dataFromServer = System.Text.Encoding.ASCII.GetString(myReadBuffer);
 				
-				//serverManager_.detectMove(dataFromServer);
 				serverManager_.mensajes.Add(dataFromServer);
+
+				//vaciar buffer
+				Array.Clear(myReadBuffer, 0, 26);
 			}
 			catch (Exception ex)
 			{
