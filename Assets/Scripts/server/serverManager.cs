@@ -160,9 +160,7 @@ public class serverManager : MonoBehaviour
 
 	public void detectMove(string mensaje){
 		if(mensaje != ""){
-			Debug.Log("mensaje recibido: " + mensaje);
-
-			//print("mensaje"+mensaje);
+			print("mensaje"+mensaje);
 			if(mensaje[0] == 'S'){
 				//spikes (0s o 1s)
 				detectSpikes(mensaje);

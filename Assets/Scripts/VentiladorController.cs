@@ -24,6 +24,14 @@ public class VentiladorController : MonoBehaviour
     [SerializeField]
     public screencapture screen_capture;
 
+
+    public GameObject Up;//1
+    public GameObject Down;//3
+    public GameObject Left;//2
+    public GameObject Right;//0
+
+    private int dir = 0;
+
     public AudioSource[] sounds;
     public AudioSource trampolinAudio;
     public AudioSource estallandoAudio;
@@ -117,6 +125,8 @@ public class VentiladorController : MonoBehaviour
     //GirarAntihorario
     public void GirarAntihorario_(){
         transform.Rotate (Vector3.back * 90);
+        restOne();
+        SetPush();
     }
 
     public void GirarAntihorario()
@@ -128,12 +138,54 @@ public class VentiladorController : MonoBehaviour
     //GirarHorario
     public void GirarHorario_(){
         transform.Rotate (Vector3.forward * 90);
+        addOne();
+        SetPush();
     }
 
     public void GirarHorario()
     {
         GirarHorario_();
         server.write("VH");
+    }
+
+    
+    private void DeactivateAll()
+    {
+        Up.SetActive(false);
+        Right.SetActive(false);
+        Left.SetActive(false);
+        Down.SetActive(false);
+    }
+
+    private void SetPush()
+    {
+        DeactivateAll();
+        if (dir == 0)
+        {
+            Right.SetActive(true);
+        }
+        else if (dir == 1)
+        {
+            Up.SetActive(true);
+        }
+        else if (dir == 2)
+        {
+            Left.SetActive(true);
+        }
+        else if (dir == 3)
+        {
+            Down.SetActive(true);
+        }
+    }
+
+    private void addOne()
+    {
+        dir = (dir + 1) % 4;
+    }
+
+    private void restOne()
+    {
+        dir = ((dir - 1) + 4) % 4;
     }
 
     public void Stop()

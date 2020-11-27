@@ -172,12 +172,12 @@ class SocketClass:
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         print('Socket creado')
 
-        # self.sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # self.sock2.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
+        self.sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock2.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         
         try:
             self.sock.bind((TCP_IP, TCP_PORT))
-            #self.sock2.bind((TCP_IP2, TCP_PORT))
+            self.sock2.bind((TCP_IP2, TCP_PORT))
             print('Socket bind complete')
         except socket.error as msg:
             print('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
@@ -193,19 +193,19 @@ class SocketClass:
         time.sleep(1)
         
         # #leyendo cliente ventilador
-        # self.sock2.listen(4) 
-        # print ("Esperando cliente ventilador...") 
-        # (conn_ventilador, (ip_vent,port_vent)) = self.sock2.accept()
-        # ##Enviando mensaje al ventilador
-        # self.enviarMensaje(conn_ventilador, "AV")
-        # print ("Ventilador aceptado...")
+        self.sock2.listen(4) 
+        print ("Esperando cliente ventilador...") 
+        (conn_ventilador, (ip_vent,port_vent)) = self.sock2.accept()
+        ##Enviando mensaje al ventilador
+        self.enviarMensaje(conn_ventilador, "AV")
+        print ("Ventilador aceptado...")
 
         # #Esperando 5 segundos
-        # time.sleep(5)
+        time.sleep(5)
         
         #Enviando mensaje de inicio a ambas conexiones
         self.enviarMensaje(conn_globo, "EE")
-        #enviarMensaje(conn_ventilador, "EE")
+        self.enviarMensaje(conn_ventilador, "EE")
         
         #Esperar 1 segundo
         time.sleep(1)
@@ -213,21 +213,21 @@ class SocketClass:
         
         print ("Creando threads...")  
 
-        globo_thread = ClientThread_globo(ip_globo,port_globo,conn_globo,conn_globo) 
+        globo_thread = ClientThread_globo(ip_globo,port_globo,conn_globo,conn_ventilador) 
         globo_thread.start() 
-        # vent_thread = ClientThread_ventilador(ip_vent,port_vent,conn_globo,conn_ventilador) 
-        # vent_thread.start() 
+        vent_thread = ClientThread_ventilador(ip_vent,port_vent,conn_globo,conn_ventilador) 
+        vent_thread.start() 
 
         #cometas
-        cometas_thread = Thread_generadorCometas(conn_globo,conn_globo) 
+        cometas_thread = Thread_generadorCometas(conn_globo,conn_ventilador) 
         cometas_thread.start() 
 
         #ballon spikes
-        ballonSpikes_thread = Thread_generadorBallonSpikes(conn_globo,conn_globo) 
+        ballonSpikes_thread = Thread_generadorBallonSpikes(conn_globo,conn_ventilador) 
         ballonSpikes_thread.start() 
 
         #spikes
-        spikes_thread = Thread_generadorSPikes(conn_globo,conn_globo) 
+        spikes_thread = Thread_generadorSPikes(conn_globo,conn_ventilador) 
         spikes_thread.start()
 
     def enviarMensaje(self, conn, data):

@@ -41,7 +41,7 @@ public class GloboController : MonoBehaviour
         estallandoAudio = sounds[0];
         trampolinAudio = sounds[1];
         animator = this.GetComponent<Animator>();
-        //static_speed = Configs.configuraciones.speed_globo;
+        static_speed = Configs.configuraciones.speed_globo;
 
         //server manager
         server = serverManager._server_;
@@ -51,6 +51,7 @@ public class GloboController : MonoBehaviour
     {
         initPos = this.transform.position;
         direction = new Vector2(4, -4);
+        static_speed = 10;
         speed = static_speed;
 
         /*actions.Add("izquierda", Left);
@@ -154,7 +155,7 @@ public class GloboController : MonoBehaviour
 
     public void Elevar()
     {
-        //Debug.Log("elevar");
+        Debug.Log("elevar");
         Elevar_();
         server.write("GA");
     }
