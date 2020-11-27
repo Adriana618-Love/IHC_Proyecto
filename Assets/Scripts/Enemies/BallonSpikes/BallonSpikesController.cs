@@ -32,7 +32,7 @@ public class BallonSpikesController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(server.ballonSpikes.Count > 0){
             int positionX = server.ballonSpikes[0].Key;

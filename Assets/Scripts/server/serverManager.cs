@@ -33,6 +33,9 @@ public class serverManager : MonoBehaviour
 
 	public GameObject GameLord;
 
+	//Array de mensajesRecidibos
+	public List<string> mensajes = new List<string>();
+
 	//Array de spikes (0->trampolin, 1->spike)
 	public List<char> spikes = new List<char>();
 
@@ -85,8 +88,10 @@ public class serverManager : MonoBehaviour
 	{	
 		if (socketReady)
 		{
-			detectMove(mensaje);
-			mensaje = "";
+			if(mensajes.Count > 0){
+				detectMove(mensajes[0]);
+				mensajes.RemoveAt(0);
+			}
 		}
 	}
 
@@ -317,9 +322,9 @@ public class ReadServer
 
 				theStream.Read(myReadBuffer, 0, sizeOfMessage);
 				dataFromServer = System.Text.Encoding.ASCII.GetString(myReadBuffer);
-
+				
 				//serverManager_.detectMove(dataFromServer);
-				serverManager_.setMensaje(dataFromServer);
+				serverManager_.mensajes.Add(dataFromServer);
 			}
 			catch (Exception ex)
 			{

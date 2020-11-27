@@ -49,7 +49,7 @@ public class FloorController : MonoBehaviour
      *_intervalTime = 5 =>(Spikes)=> livingTime = 60, speed = 0.5
      */
     
-    void Update()
+    void FixedUpdate()
     {
         //Debug.Log("Numero de spikes = " + server.spikes.Count);
         if(server.spikes.Count > 0){

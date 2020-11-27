@@ -27,7 +27,7 @@ public class CometaGenerator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(server.cometas.Count > 0){
             //transform.position = new Vector2(Random.Range(minAxisX, maxAxisX), transform.position.y);
