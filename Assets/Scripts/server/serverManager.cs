@@ -28,8 +28,8 @@ public class serverManager : MonoBehaviour
 
 	//GloboController
 	public GameObject GloboController_;
-    private GloboController globoController;
-	public VentiladorController ventiladorController;
+    private GloboSlave globoController;
+	public VentiladorSlave ventiladorController;
 
 	public GameObject GameLord;
 
@@ -60,8 +60,8 @@ public class serverManager : MonoBehaviour
     {
 		GameObject Game = GameObject.Find("Game");
 		GloboController_ = Game.transform.Find("Balloon").gameObject;
-		globoController = GloboController_.GetComponent<GloboController>();
-		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorController>();
+		globoController = GloboController_.GetComponent<GloboSlave>();
+		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorSlave>();
 		GameLord = GameObject.Find("GameLord");
 		GameLord.GetComponent<GameLord>().Iniciar();
 	}
@@ -72,7 +72,7 @@ public class serverManager : MonoBehaviour
 		//GloboController
 		if (GloboController_ != null)
 		{
-			globoController = GloboController_.GetComponent<GloboController>();
+			globoController = GloboController_.GetComponent<GloboSlave>();
 		}
 		if(GameLord != null)
         {
@@ -160,7 +160,7 @@ public class serverManager : MonoBehaviour
 
 	public void detectMove(string mensaje){
 		if(mensaje != ""){
-			//print("mensaje"+mensaje);
+			print("mensaje"+mensaje);
 			if(mensaje[0] == 'S'){
 				//spikes (0s o 1s)
 				detectSpikes(mensaje);
