@@ -18,8 +18,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	String Host = "26.162.26.142";
-	//String Host = "127.0.0.1";
+	//String Host = "26.162.26.142";
+	String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -325,6 +325,7 @@ public class ReadServer
 				
 				//serverManager_.detectMove(dataFromServer);
 				serverManager_.mensajes.Add(dataFromServer);
+				Array.Clear(myReadBuffer, 0, 26);
 			}
 			catch (Exception ex)
 			{

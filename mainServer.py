@@ -68,10 +68,11 @@ class Thread_generadorSPikes(Thread):
     def run(self): 
         try:
             while (True):
+                time.sleep(1)
                 data = self.generateSpikes()
                 data = bytes(data, 'utf-8')
-                self.conn_globo.sendall(data)
                 self.conn_ventilador.sendall(data)
+                self.conn_globo.sendall(data)
                 print ("Server envio a ambos datos [spikes]:", data)    
                 # Sleep for a TIME
                 time.sleep(30)
@@ -135,6 +136,7 @@ class Thread_generadorBallonSpikes(Thread):
     def run(self): 
         try:
             while (True):
+                time.sleep(1)
                 data = self.generateBalloonSpikes()
                 data = bytes(data, 'utf-8')
                 self.conn_globo.sendall(data)

@@ -61,6 +61,7 @@ public class VentiladorController : MonoBehaviour
         speed = static_speed;
         //server manager
         server = serverManager._server_;
+        SetPush();
         actions.Add("arriba", Elevar);
         actions.Add("abajo", Bajar);
 
