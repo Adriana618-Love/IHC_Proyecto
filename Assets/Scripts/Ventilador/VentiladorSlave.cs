@@ -54,6 +54,7 @@ public class VentiladorSlave : MonoBehaviour
 
     private void SetPush()
     {
+        return;
         DeactivateAll();
         if(dir == 0)
         {
