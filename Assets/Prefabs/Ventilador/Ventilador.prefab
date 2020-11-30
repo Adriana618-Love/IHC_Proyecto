@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4100483789794283233}
   - component: {fileID: 5837350656504101715}
   - component: {fileID: 5067976675774189545}
+  - component: {fileID: 7642380747836559885}
+  - component: {fileID: 3289246034026121313}
   m_Layer: 0
   m_Name: Ventilador
   m_TagString: Untagged
@@ -53,6 +55,10 @@ MonoBehaviour:
   initPos: {x: 0, y: 0}
   static_speed: 0
   screen_capture: {fileID: 0}
+  Up: {fileID: 0}
+  Down: {fileID: 0}
+  Left_dir: {fileID: 0}
+  Right_dir: {fileID: 0}
   sounds: []
   trampolinAudio: {fileID: 0}
   estallandoAudio: {fileID: 0}
@@ -107,3 +113,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &7642380747836559885
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845702911875097239}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 35.748737, y: 0.3957367}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.7407405, y: 5.9311337}
+    newSize: {x: 2.7407405, y: 5.9311337}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 74.23821, y: 7.77792}
+  m_EdgeRadius: 0
+--- !u!249 &3289246034026121313
+AreaEffector2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845702911875097239}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_UseGlobalAngle: 0
+  m_ForceAngle: 0
+  m_ForceMagnitude: 10
+  m_ForceVariation: 0
+  m_ForceTarget: 0
+  m_Drag: 0
+  m_AngularDrag: 0
