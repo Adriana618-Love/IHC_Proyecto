@@ -50,8 +50,6 @@ public class VentiladorController : MonoBehaviour
         //trampolinAudio = sounds[1];
         //animator = this.GetComponent<Animator>();
         static_speed = Configs.configuraciones.speed_globo;
-
-        
     }
 
     void Start()
