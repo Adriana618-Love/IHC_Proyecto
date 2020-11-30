@@ -107,7 +107,7 @@ public class VentiladorController : MonoBehaviour
     public void Left()
     {
         Left_();
-        server.write("VI");
+        server.write("VL");
     }
 
     //Right
@@ -118,7 +118,7 @@ public class VentiladorController : MonoBehaviour
     public void Right()
     {
         Right_();
-        server.write("VD");
+        server.write("VR");
     }
 
     //GirarAntihorario
@@ -277,15 +277,27 @@ public class VentiladorController : MonoBehaviour
         {
             GirarAntihorario();
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        else if (Input.GetKeyDown(KeyCode.H))
         {
             GirarHorario();
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Elevar();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Bajar();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Left();
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Right();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             Menu();
         }

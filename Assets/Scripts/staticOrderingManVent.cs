@@ -37,7 +37,7 @@ public class staticOrderingManVent : MonoBehaviour
 	{
 		if (_tutorialInit)
 		{
-			Debug.Log("Recibiendo movimientos");
+			//Debug.Log("Recibiendo movimientos");
 			//staticMan.compareMoves(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves) &&
 			VentiladorController ventiladorController = Ventilador.GetComponent<VentiladorController>();
 			ventiladorController.DetectarMovimiento(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves);
