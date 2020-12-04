@@ -1432,7 +1432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097286659
 GameObject:
@@ -1904,7 +1904,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6174947512679502740, guid: e7e451533adcdb548b0fc98921f20199, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6174947512679502740, guid: e7e451533adcdb548b0fc98921f20199, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2376,7 +2376,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1455815620
 GameObject:
@@ -2468,9 +2468,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: serverManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2987744421796940793, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
+      propertyPath: cometaGenerator
+      value: 
+      objectReference: {fileID: 634269676}
     - target: {fileID: 2987744421796940794, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2987744421796940794, guid: cc4a9bf302a388548abf7110dc5dec76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2635,7 +2639,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1829019057
 GameObject:
@@ -2945,7 +2949,7 @@ Transform:
   - {fileID: 1404813742}
   - {fileID: 1173824094403326334}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2120065394
 GameObject:
@@ -3023,7 +3027,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1173824094403326333
 PrefabInstance:

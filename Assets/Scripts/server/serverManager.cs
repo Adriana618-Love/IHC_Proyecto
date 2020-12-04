@@ -18,8 +18,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	//String Host = "26.162.26.142";
-	String Host = "127.0.0.1";
+	String Host = "26.162.26.142";
+	//String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -40,10 +40,12 @@ public class serverManager : MonoBehaviour
 	public List<char> spikes = new List<char>();
 
 	//Array de cometas
+	public CometaGenerator cometaGenerator;
 	public List<int> cometas = new List<int>();
 	public List<int> tipoCometas = new List<int>();
 
 	//array de ballonSpikes
+	public BallonSpikesController ballonSpikesController;
 	public List<KeyValuePair<int, int>> ballonSpikes = new List<KeyValuePair<int, int>>();
 
 	private void Awake()
@@ -65,6 +67,8 @@ public class serverManager : MonoBehaviour
 		GloboController_ = Game.transform.Find("Balloon").gameObject;
 		globoController = GloboController_.GetComponent<GloboSlave>();
 		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorSlave>();
+		cometaGenerator = Game.transform.Find("CometasGenerator").gameObject.GetComponent<CometaGenerator>();
+		ballonSpikesController = Game.transform.Find("BalloonSpikesController").gameObject.GetComponent<BallonSpikesController>();
 		GameLord = GameObject.Find("GameLord");
 		GameLord.GetComponent<GameLord>().Iniciar();
 	}
@@ -193,6 +197,8 @@ public class serverManager : MonoBehaviour
 				Debug.Log("Empezar");
 				redirectScene(mensaje);
             }
+
+			//write("ACK");
 		}
 	}
 
@@ -276,6 +282,8 @@ public class serverManager : MonoBehaviour
 		int num = Int16.Parse(strNum);
 		//normalizar y agregar
 		cometas.Add( num - 18);
+
+		cometaGenerator.GenerarCometa(Int16.Parse(tipoCometa), num-18);
 	}
 
 	public void detectBalloonSpikes(string mensaje){
@@ -283,6 +291,8 @@ public class serverManager : MonoBehaviour
 		string posY = mensaje.Substring(3, 2);
 		var pair = new KeyValuePair<int, int>( Int16.Parse(posX) - 18,  Int16.Parse(posY) - 8);
 		ballonSpikes.Add( pair );
+
+		ballonSpikesController.GenerarBalloonSpike(Int16.Parse(posX) - 18, Int16.Parse(posY) - 8);
 	}
 
 	

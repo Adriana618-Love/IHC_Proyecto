@@ -25,7 +25,8 @@ public class TextConroller : MonoBehaviour
         {
             string myRol = "";
             if (serverManager._server_.rol == "G") myRol = "Globo";
-            else myRol = "Ventilador";
+            else if (serverManager._server_.rol == "V") myRol = "Ventilador";
+            else myRol = "Esperando";
             text.text = "Rol Asignado: "+myRol;
         }
         else

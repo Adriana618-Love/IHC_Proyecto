@@ -91,7 +91,7 @@ public class VentiladorSlave : MonoBehaviour
 
     //Bajar
     public void Bajar_(){
-        transform.Translate(0, 2, 0);
+        transform.Translate(0, -2, 0);
     }
     //Left
     public void Left_(){

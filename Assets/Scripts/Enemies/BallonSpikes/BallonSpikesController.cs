@@ -34,7 +34,7 @@ public class BallonSpikesController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(server.ballonSpikes.Count > 0){
+        /*if(server.ballonSpikes.Count > 0){
             int positionX = server.ballonSpikes[0].Key;
             int positionY = server.ballonSpikes[0].Value;
 
@@ -42,12 +42,12 @@ public class BallonSpikesController : MonoBehaviour
             Instantiate(BALLON, transform.position, Quaternion.identity);
 
             server.ballonSpikes.RemoveAt(0);
-        }
-        /*
-        if(maxBallons > 0)
-        {
-            GenerateBallon();
-        }
-        */
+        }*/
+    }
+
+    public void GenerarBalloonSpike(int positionX, int positionY)
+    {
+        transform.position = new Vector2(positionX, positionY);
+        Instantiate(BALLON, transform.position, Quaternion.identity);
     }
 }
