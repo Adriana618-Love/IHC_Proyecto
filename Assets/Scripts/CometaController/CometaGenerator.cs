@@ -29,7 +29,7 @@ public class CometaGenerator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(server.cometas.Count > 0){
+        /*if(server.cometas.Count > 0){
             //transform.position = new Vector2(Random.Range(minAxisX, maxAxisX), transform.position.y);
             int positionX = server.cometas[0];
             int tipoCometa = server.tipoCometas[0];
@@ -40,6 +40,12 @@ public class CometaGenerator : MonoBehaviour
             transform.position = new Vector2(positionX, transform.position.y);
             Instantiate(cometas[tipoCometa], transform.position, Quaternion.identity);
             _init_time = Time.time; //Reseteamos el tiempo
-        }
+        }*/
+    }
+
+    public void GenerarCometa(int tipoCometa, int posX)
+    {
+        transform.position = new Vector2(posX, transform.position.y);
+        Instantiate(cometas[tipoCometa], transform.position, Quaternion.identity);
     }
 }
