@@ -40,8 +40,11 @@ class ClientThread_globo(Thread):
                 print ("Cerrando conexion con globo")
                 break
             #========transmitir mensaje recibido
-            self.conn_ventilador.sendall(data)
-            print ("Server envio datos:", data)
+            try:
+                self.conn_ventilador.sendall(data)
+                print ("Server envio datos:", data)
+            except socket.error as msg:
+                print('Ventilador se desconecto')
 
 class ClientThread_ventilador(Thread): 
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
@@ -65,9 +68,12 @@ class ClientThread_ventilador(Thread):
                 print ("Cerrando conexion con ventilador")
                 break
             #========transmitir mensaje recibido
-            self.conn_globo.sendall(data)
-            print ("Server envio datos:", data)
-
+            try:
+                self.conn_globo.sendall(data)
+                print ("Server envio datos:", data)
+            except socket.error as msg:
+                print('Ventilador se desconecto')
+            
 class Thread_verificarConexion(Thread): 
     def __init__(self, globo_conectado_, ventilador_conectado_): 
         Thread.__init__(self) 
