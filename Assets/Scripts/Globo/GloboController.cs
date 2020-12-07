@@ -78,7 +78,7 @@ public class GloboController : MonoBehaviour
     public void Left()
     {
         Left_();
-        server.write("GI");
+        server.write("GL");
     }
 
     public void Right_(){
@@ -89,7 +89,7 @@ public class GloboController : MonoBehaviour
     {
         //Debug.Log("derecha");
         Right_();
-        server.write("GD");
+        server.write("GR");
     }
 
     public void Stop()

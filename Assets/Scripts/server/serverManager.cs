@@ -18,8 +18,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	//String Host = "26.162.26.142";
-	String Host = "127.0.0.1";
+	String Host = "26.162.26.142";
+	//String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -258,16 +258,16 @@ public class serverManager : MonoBehaviour
 	}
 
 	public void detectGloboMove(string mensaje){
-		if (mensaje[1] == 'I'){
-			Debug.Log("Globo Izquierda");
+		if (mensaje[1] == 'L'){
+			//Debug.Log("Globo Izquierda");
 			globoController.Left_();
 		}
-		else if (mensaje[1] == 'D'){
-			Debug.Log("Globo Derecha");
+		else if (mensaje[1] == 'R'){
+			//Debug.Log("Globo Derecha");
 			globoController.Right_();
 		}
 		else if (mensaje[1] == 'A'){
-			Debug.Log("Globo Arriba");
+			//Debug.Log("Globo Arriba");
 			globoController.Elevar_();
 		}
 		else if (mensaje[1] == 'S'){
@@ -293,11 +293,11 @@ public class serverManager : MonoBehaviour
 
 	public void detectVentiladorMove(string mensaje){
 		if (mensaje[1] == 'G'){
-			Debug.Log("Ventilador giro antihorario");
+			//Debug.Log("Ventilador giro antihorario");
 			ventiladorController.GirarAntihorario_();
 		}
 		else if (mensaje[1] == 'H'){
-			Debug.Log("Ventilador giro horario");
+			//Debug.Log("Ventilador giro horario");
 			ventiladorController.GirarHorario_();
 		}
 		else if (mensaje[1] == 'A'){

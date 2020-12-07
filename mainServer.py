@@ -217,6 +217,45 @@ class Thread_generadorBallonSpikes(Thread):
         return mensaje
 
 
+class Thread_generadorBallonSpikes(Thread): 
+    def __init__(self, conn_globo, conn_ventilador): 
+        Thread.__init__(self) 
+        self.conn_globo = conn_globo 
+        self.conn_ventilador = conn_ventilador 
+        print ('Generador balloon spikes corriendo.' )
+
+    def run(self): 
+        try:
+            while (True):
+                time.sleep(1)
+                data = self.generateBalloonSpikes()
+                data = bytes(data, 'utf-8')
+                self.conn_globo.sendall(data)
+                self.conn_ventilador.sendall(data)
+                print ("Server envio a ambos datos [balloon spikes]:", data)    
+                # Sleep for a TIME
+                time.sleep(sleep_ballonSpikes)
+        except socket.error as msg:
+            print('Sockets cerrados - thread Ballon Spikes')
+
+    def generateBalloonSpikes(self):
+        mensaje = "B"
+
+        #seleccionar la posicion en X
+        rand = str(random.randint(0, 36))
+        while(len(rand) < 2):
+            rand = '0'+ rand
+        mensaje += str(rand)
+
+        #seleccionar la posicion en Y
+        rand = str(random.randint(0, 18))
+        while(len(rand) < 2):
+            rand = '0'+ rand
+        mensaje += str(rand)
+
+        return mensaje
+
+
 def verificarConexionGlobo(conn_ventilador, globo_conectado_):
     while True:
         if(globo_conectado_):
