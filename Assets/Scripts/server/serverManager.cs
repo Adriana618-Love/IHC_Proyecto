@@ -81,7 +81,8 @@ public class serverManager : MonoBehaviour
 
 		estadoGlobo = GameObject.Find("Estado Globo");
 		estadoVentilador = GameObject.Find("Estado Ventilador");
-		texto_error_al_conectar = GameObject.Find("texto_error_al_conectar");
+		GameObject canvas = GameObject.Find("Canvas");
+		texto_error_al_conectar = canvas.transform.Find("texto_error_al_conectar").gameObject;
 
 		GameLord = GameObject.Find("GameLord");
 		GameLord.GetComponent<GameLord>().Iniciar();
@@ -363,7 +364,8 @@ public class serverManager : MonoBehaviour
     {
 		yield return new WaitForSeconds(1);
 		texto_error_al_conectar.SetActive(true);
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
+		write("QQ");
 		SceneManager.LoadScene("menuScene");
     }
 	

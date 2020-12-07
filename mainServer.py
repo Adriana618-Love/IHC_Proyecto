@@ -31,7 +31,7 @@ class ClientThread_globo(Thread):
         while True : 
             data = self.conn_globo.recv(2) 
             #print ("Server recibio datos:", data)
-
+            global globo_conectado
             if(data == b'AC'):
                 print ("Globo envio AC")
                 globo_conectado = True
@@ -44,7 +44,7 @@ class ClientThread_globo(Thread):
                 self.conn_ventilador.sendall(data)
                 print ("Server envio datos:", data)
             except socket.error as msg:
-                #print('Ventilador se desconecto')
+                True
 
 class ClientThread_ventilador(Thread): 
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
@@ -59,10 +59,10 @@ class ClientThread_ventilador(Thread):
         while True : 
             data = self.conn_ventilador.recv(2) 
             #print ("Server recibio datos:", data)
-
+            global ventilador_conectado
             if(data == b'AC'):
                 print ("Ventilador envio AC")
-                globo_conectado = True
+                ventilador_conectado = True
                 continue
             elif(data == b'QQ'):
                 print ("Cerrando conexion con ventilador")
@@ -72,7 +72,7 @@ class ClientThread_ventilador(Thread):
                 self.conn_globo.sendall(data)
                 print ("Server envio datos:", data)
             except socket.error as msg:
-                #print('Ventilador se desconecto')
+                True
             
 class Thread_verificarConexion(Thread): 
     def __init__(self, globo_conectado_, ventilador_conectado_): 
@@ -219,20 +219,26 @@ class Thread_generadorBallonSpikes(Thread):
 
 def verificarConexionGlobo(conn_ventilador, globo_conectado_):
     while True:
-        if(globo_conectado_):
-            globo_conectado_ = False
+        global globo_conectado
+        print("THREAD GLOBO L = ",globo_conectado_)
+        print("THREAD GLOBO G = ",globo_conectado)
+        if(globo_conectado):
+            globo_conectado = False
         else:
-            print("Globo Desconecto")
+            print("Globo Desconecto ========================================")
             data = bytes('GD', 'utf-8')
             conn_ventilador.sendall(data)
         time.sleep(4)
 
 def verificarConexionVentilador(conn_globo, ventilador_conectado_):
     while True:
-        if(ventilador_conectado_):
-            ventilador_conectado_ = False
+        global ventilador_conectado
+        print("THREAD VENT L = ",ventilador_conectado_)
+        print("THREAD VENT G = ",ventilador_conectado)
+        if(ventilador_conectado):
+            ventilador_conectado = False
         else:
-            print("Ventilador Desconecto")
+            print("Ventilador Desconecto ==========================================")
             data = bytes('VD', 'utf-8')
             conn_globo.sendall(data)
         time.sleep(4)
@@ -293,8 +299,8 @@ class SocketClass:
         vent_thread.start() 
 
         #correr threads que detectan acks
-        Thread(target=verificarConexionGlobo, args=(conn_ventilador, globo_conectado))
-        Thread(target=verificarConexionVentilador, args=(conn_globo, ventilador_conectado))
+        Thread(target=verificarConexionGlobo, args=(conn_ventilador, globo_conectado)).start()
+        Thread(target=verificarConexionVentilador, args=(conn_globo, ventilador_conectado)).start()
 
         #cometas
         cometas_thread = Thread_generadorCometas(conn_globo,conn_ventilador) 

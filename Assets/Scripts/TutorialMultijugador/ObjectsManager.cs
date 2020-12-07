@@ -154,7 +154,7 @@ public class ObjectsManager : MonoBehaviour
         ///
         yield return new WaitForSeconds(trnstion_time);
 
-        MainCamera.transform.position = new Vector2(0, 0);
+        MainCamera.transform.position = new Vector3(0, 0,-10);
         Minigame.SetActive(true);
     }
 
