@@ -32,8 +32,8 @@ class ClientThread_globo(Thread):
             data = self.conn_globo.recv(2) 
             #print ("Server recibio datos:", data)
 
-            if(data == b'ACK'):
-                print ("Globo envio ACK")
+            if(data == b'AC'):
+                print ("Globo envio AC")
                 globo_conectado = True
                 continue
             else if(data == b'QQ'):
@@ -57,8 +57,8 @@ class ClientThread_ventilador(Thread):
             data = self.conn_ventilador.recv(2) 
             #print ("Server recibio datos:", data)
 
-            if(data == b'ACK'):
-                print ("Ventilador envio ACK")
+            if(data == b'AC'):
+                print ("Ventilador envio AC")
                 globo_conectado = True
                 continue
             else if(data == b'QQ'):
