@@ -15,6 +15,9 @@ probabilidad_spikes = 0.3
 sleep_cometas = 4
 sleep_ballonSpikes = 8
 
+globo_conectado = True
+ventilador_conectado = True
+
 class ClientThread_globo(Thread): 
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
         Thread.__init__(self) 
@@ -29,7 +32,11 @@ class ClientThread_globo(Thread):
             data = self.conn_globo.recv(2) 
             #print ("Server recibio datos:", data)
 
-            if(data == b'QQ'):
+            if(data == b'ACK'):
+                print ("Globo envio ACK")
+                globo_conectado = True
+                continue
+            else if(data == b'QQ'):
                 print ("Cerrando conexion con globo")
                 break
             #========transmitir mensaje recibido
@@ -50,12 +57,51 @@ class ClientThread_ventilador(Thread):
             data = self.conn_ventilador.recv(2) 
             #print ("Server recibio datos:", data)
 
-            if(data == b'QQ'):
+            if(data == b'ACK'):
+                print ("Ventilador envio ACK")
+                globo_conectado = True
+                continue
+            else if(data == b'QQ'):
                 print ("Cerrando conexion con ventilador")
                 break
             #========transmitir mensaje recibido
             self.conn_globo.sendall(data)
             print ("Server envio datos:", data)
+
+class Thread_verificarConexion(Thread): 
+    def __init__(self, globo_conectado_, ventilador_conectado_): 
+        Thread.__init__(self) 
+        self.conn_globo = conn_globo 
+        self.conn_ventilador = conn_ventilador 
+        print ('Generador cometas corriendo.' )
+
+    def run(self): 
+        try:
+            while (True):
+                data = self.generateCometas()
+                data = bytes(data, 'utf-8')
+                self.conn_globo.sendall(data)
+                self.conn_ventilador.sendall(data)
+                print ("Server envio a ambos datos [cometa]:", data)    
+                # Sleep for a TIME
+                time.sleep(sleep_cometas)
+        except socket.error as msg:
+            print('Sockets cerrados - thread Cometa')
+
+    def generateCometas(self):
+        mensaje = "C"
+
+        #seleccionar tipo de cometa
+        rand = random.randint(0, 1)
+        mensaje += str(rand)
+
+        #seleccionar la posicion en X
+        rand = str(random.randint(0, 36))
+        while(len(rand) < 2):
+            rand = '0'+ rand
+        mensaje += str(rand)
+
+        return mensaje
 
 
 class Thread_generadorSPikes(Thread): 
@@ -165,6 +211,24 @@ class Thread_generadorBallonSpikes(Thread):
         return mensaje
 
 
+def verificarConexionGlobo(conn_ventilador, globo_conectado_):
+    while True:
+        if(globo_conectado_):
+            globo_conectado_ = false
+        else:
+            data = bytes('GD', 'utf-8')
+            conn_ventilador.sendall(data)
+        sleep(4)
+
+def verificarConexionVentilador(conn_globo, ventilador_conectado_):
+    while True:
+        if(ventilador_conectado_):
+            ventilador_conectado_ = false
+        else:
+            data = bytes('VD', 'utf-8')
+            conn_globo.sendall(data)
+        sleep(4)
+
 class SocketClass:
     def __init__(self):
         print("Target IP:", TCP_IP)
@@ -219,6 +283,10 @@ class SocketClass:
         globo_thread.start() 
         vent_thread = ClientThread_ventilador(ip_vent,port_vent,conn_globo,conn_ventilador) 
         vent_thread.start() 
+
+        #correr threads que detectan acks
+        Thread(target=verificarConexionGlobo, args=(conn_ventilador, globo_conectado))
+        Thread(target=verificarConexionVentilador, args=(conn_globo, ventilador_conectado))
 
         #cometas
         cometas_thread = Thread_generadorCometas(conn_globo,conn_ventilador) 

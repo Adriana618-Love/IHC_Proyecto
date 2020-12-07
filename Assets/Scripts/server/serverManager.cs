@@ -40,13 +40,22 @@ public class serverManager : MonoBehaviour
 	public List<char> spikes = new List<char>();
 
 	//Array de cometas
-	public CometaGenerator cometaGenerator;
+	private CometaGenerator cometaGenerator;
 	public List<int> cometas = new List<int>();
 	public List<int> tipoCometas = new List<int>();
 
 	//array de ballonSpikes
-	public BallonSpikesController ballonSpikesController;
+	private BallonSpikesController ballonSpikesController;
 	public List<KeyValuePair<int, int>> ballonSpikes = new List<KeyValuePair<int, int>>();
+
+	//conexion de jugadores
+	private bool globoConectado = false;
+	private bool ventiladorConectado = false;
+
+	//gameobjects de los estados del juego
+	private GameObject estadoGlobo;
+	private GameObject estadoVentilador;
+	private GameObject texto_error_al_conectar;
 
 	private void Awake()
 	{
@@ -69,6 +78,11 @@ public class serverManager : MonoBehaviour
 		ventiladorController = Game.transform.Find("Ventilador").gameObject.GetComponent<VentiladorSlave>();
 		cometaGenerator = Game.transform.Find("CometasGenerator").gameObject.GetComponent<CometaGenerator>();
 		ballonSpikesController = Game.transform.Find("BalloonSpikesController").gameObject.GetComponent<BallonSpikesController>();
+
+		estadoGlobo = GameObject.Find("Estado Globo");
+		estadoVentilador = GameObject.Find("Estado Ventilador");
+		texto_error_al_conectar = GameObject.Find("texto_error_al_conectar");
+
 		GameLord = GameObject.Find("GameLord");
 		GameLord.GetComponent<GameLord>().Iniciar();
 	}
@@ -86,6 +100,7 @@ public class serverManager : MonoBehaviour
 			Debug.Log("sinGameLord");
         }
 		StartCoroutine("intentarConectar");
+		StartCoroutine("enviarACK");
 	}
 
 	public void Update()
@@ -118,6 +133,16 @@ public class serverManager : MonoBehaviour
 			StartCoroutine("intentarConectar");
 		}
         
+    }
+
+	IEnumerator enviarACK()
+    {
+		if (socketReady)
+		{
+			write("ACK");
+		}
+		yield return new WaitForSeconds(2);
+		StartCoroutine("enviarACK");   
     }
 
 	void OnApplicationQuit()
@@ -195,10 +220,12 @@ public class serverManager : MonoBehaviour
 			else if(mensaje[0] == 'E')
             {
 				Debug.Log("Empezar");
+				globoConectado = true;
+				ventiladorConectado = true;
+
 				redirectScene(mensaje);
             }
 
-			//write("ACK");
 		}
 	}
 
@@ -243,6 +270,25 @@ public class serverManager : MonoBehaviour
 			Debug.Log("Globo Arriba");
 			globoController.Elevar_();
 		}
+		else if (mensaje[1] == 'S'){
+			Debug.Log("Globo Conectado");
+			//se debería pintar de verde el conectado
+			globoConectado = true;
+		}
+		else if (mensaje[1] == 'D'){
+			Debug.Log("Globo Desconectado");
+			//se debería pintar de rojo el conectado
+			globoConectado = false;
+
+			//setear sprite de color rojo 
+			GameObject redCircle = estadoGlobo.transform.Find("RedCircle").gameObject;
+			GameObject greenCircle = estadoGlobo.transform.Find("GreenCIrcle").gameObject;
+
+			redCircle.SetActive(true); 
+			greenCircle.SetActive(false); 
+
+			StartCoroutine("salirMenu");
+		}
 	}
 
 	public void detectVentiladorMove(string mensaje){
@@ -265,6 +311,23 @@ public class serverManager : MonoBehaviour
 		}
 		else if (mensaje[1] == 'R'){
 			ventiladorController.Right_();
+		}
+		else if (mensaje[1] == 'S'){
+			Debug.Log("Ventilador Conectado");
+			ventiladorConectado = true;
+		}
+		else if (mensaje[1] == 'D'){
+			Debug.Log("Ventilador Desconectado");
+			ventiladorConectado = false;
+
+			//setear sprite de color rojo 
+			GameObject redCircle = estadoVentilador.transform.Find("RedCircle").gameObject;
+			GameObject greenCircle = estadoVentilador.transform.Find("GreenCIrcle").gameObject;
+
+			redCircle.SetActive(true); 
+			greenCircle.SetActive(false); 
+
+			StartCoroutine("salirMenu");
 		}
 	}
 
@@ -295,6 +358,14 @@ public class serverManager : MonoBehaviour
 		ballonSpikesController.GenerarBalloonSpike(Int16.Parse(posX) - 18, Int16.Parse(posY) - 8);
 	}
 
+
+	IEnumerator salirMenu()
+    {
+		yield return new WaitForSeconds(1);
+		texto_error_al_conectar.SetActive(true);
+		yield return new WaitForSeconds(3);
+		SceneManager.LoadScene("menuScene");
+    }
 	
 }
 
