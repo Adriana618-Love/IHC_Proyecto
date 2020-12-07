@@ -36,7 +36,7 @@ class ClientThread_globo(Thread):
                 print ("Globo envio AC")
                 globo_conectado = True
                 continue
-            else if(data == b'QQ'):
+            elif(data == b'QQ'):
                 print ("Cerrando conexion con globo")
                 break
             #========transmitir mensaje recibido
@@ -61,7 +61,7 @@ class ClientThread_ventilador(Thread):
                 print ("Ventilador envio AC")
                 globo_conectado = True
                 continue
-            else if(data == b'QQ'):
+            elif(data == b'QQ'):
                 print ("Cerrando conexion con ventilador")
                 break
             #========transmitir mensaje recibido
