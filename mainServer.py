@@ -44,7 +44,7 @@ class ClientThread_globo(Thread):
                 self.conn_ventilador.sendall(data)
                 print ("Server envio datos:", data)
             except socket.error as msg:
-                print('Ventilador se desconecto')
+                #print('Ventilador se desconecto')
 
 class ClientThread_ventilador(Thread): 
     def __init__(self,ip,port, conn_globo, conn_ventilador): 
@@ -72,7 +72,7 @@ class ClientThread_ventilador(Thread):
                 self.conn_globo.sendall(data)
                 print ("Server envio datos:", data)
             except socket.error as msg:
-                print('Ventilador se desconecto')
+                #print('Ventilador se desconecto')
             
 class Thread_verificarConexion(Thread): 
     def __init__(self, globo_conectado_, ventilador_conectado_): 
@@ -220,20 +220,22 @@ class Thread_generadorBallonSpikes(Thread):
 def verificarConexionGlobo(conn_ventilador, globo_conectado_):
     while True:
         if(globo_conectado_):
-            globo_conectado_ = false
+            globo_conectado_ = False
         else:
+            print("Globo Desconecto")
             data = bytes('GD', 'utf-8')
             conn_ventilador.sendall(data)
-        sleep(4)
+        time.sleep(4)
 
 def verificarConexionVentilador(conn_globo, ventilador_conectado_):
     while True:
         if(ventilador_conectado_):
-            ventilador_conectado_ = false
+            ventilador_conectado_ = False
         else:
+            print("Ventilador Desconecto")
             data = bytes('VD', 'utf-8')
             conn_globo.sendall(data)
-        sleep(4)
+        time.sleep(4)
 
 class SocketClass:
     def __init__(self):
