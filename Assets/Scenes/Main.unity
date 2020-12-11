@@ -938,7 +938,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ventilador
+  m_text: 'ventilador
 
 '
   m_isRightToLeft: 0

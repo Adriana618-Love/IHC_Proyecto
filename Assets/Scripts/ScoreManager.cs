@@ -84,11 +84,12 @@ public class ScoreManager : MonoBehaviour
         else
             ballon.GetComponent<GloboSlave>().ES();
         score.GetComponent<Animator>().SetTrigger("win");
-        
+        /*
         while (ballon.transform.position.y > 0.2f || ballon.transform.position.y < -0.2f) { 
             yield return new WaitForSeconds(0.2f); 
             //Debug.Log(ballon.transform.position);
         }
+        */
         yield return new WaitForSeconds(4f);
         score.GetComponent<Animator>().SetTrigger("finale");
         plot("Salvaste al Globo, Bien hecho", score);

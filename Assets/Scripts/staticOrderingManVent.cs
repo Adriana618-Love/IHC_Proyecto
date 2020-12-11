@@ -28,8 +28,8 @@ public class staticOrderingManVent : MonoBehaviour
 		gameObject.GetComponent<Renderer>().enabled = false;
 
 		//inicializar staticMan
-		staticMan = new StaticMan(gameObject, screencapture_.objectPose);
-		staticMan.makeMove();
+		//staticMan = new StaticMan(gameObject, screencapture_.objectPose);
+		//staticMan.makeMove();
 
 		StartCoroutine("DetectarVentilador");
 	}

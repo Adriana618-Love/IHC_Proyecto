@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ObjectsManager : MonoBehaviour
 {
@@ -145,17 +146,8 @@ public class ObjectsManager : MonoBehaviour
         ///////Sobrevivie el máximo de tiempo posible///////
         Globo.SetActive(false);
         Paper.SetActive(false);
-        text.text = "Sobrevive el máximo de tiempo posible";
-        helper.text = "SCORE: 10";
-        yield return new WaitForSeconds(1);
-        helper.text = "SCORE: 50";
-        yield return new WaitForSeconds(1);
-        helper.text = "SCORE: 100";
-        ///
-        yield return new WaitForSeconds(trnstion_time);
 
-        MainCamera.transform.position = new Vector3(0, 0,-10);
-        Minigame.SetActive(true);
+        SceneManager.LoadScene("menuScene");
     }
 
 }
