@@ -18,8 +18,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	String Host = "26.162.26.142";
-	//String Host = "127.0.0.1";
+	//String Host = "26.162.26.142";
+	String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -326,7 +326,7 @@ public class serverManager : MonoBehaviour
 			GameObject greenCircle = estadoVentilador.transform.Find("GreenCIrcle").gameObject;
 
 			redCircle.SetActive(true); 
-			greenCircle.SetActive(false); 
+			greenCircle.SetActive(false);
 
 			GameObject Game = GameObject.Find("Game");
 			Game.transform.Find("Ventilador").gameObject.SetActive(false); 
