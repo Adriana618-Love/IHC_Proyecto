@@ -18,6 +18,9 @@ public class ScoreManager : MonoBehaviour
 
     public GameObject configs;
 
+    //server manager
+    public serverManager server;
+    
     // Start is called before the first frame update
 
     private void Awake()
@@ -27,6 +30,8 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        server = serverManager._server_;
+
         wct = new WebCamTexture();
         StartCoroutine("upScore");
         in_score = 0;
@@ -93,6 +98,7 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         score.GetComponent<Animator>().SetTrigger("finale");
         plot("Salvaste al Globo, Bien hecho", score);
+        server.write("QQ");
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("menuScene");
     }
