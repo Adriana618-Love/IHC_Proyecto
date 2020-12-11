@@ -44,7 +44,7 @@ public class screencapture : MonoBehaviour
 		/*setupSocket();
 		theWriter.Write('Y');
 		theWriter.Flush();*/
-		//StartCoroutine("intentarConectar");
+		StartCoroutine("intentarConectar");
 	}
 
 	public void Update()
@@ -77,7 +77,7 @@ public class screencapture : MonoBehaviour
 			theWriter.Flush();
 		}
 		else{
-			yield return new WaitForSeconds(5);
+			yield return new WaitForSeconds(25);
 			StartCoroutine("intentarConectar");
 		}
         

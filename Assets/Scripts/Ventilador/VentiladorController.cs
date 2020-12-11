@@ -60,10 +60,10 @@ public class VentiladorController : MonoBehaviour
         //server manager
         server = serverManager._server_;
         SetPush();
-        actions.Add("ve", Elevar);
+        actions.Add("go", Right);
 
-        actions.Add("pausa", Stop);
-        actions.Add("menu", Menu);
+        /*actions.Add("pausa", Stop);
+        actions.Add("menu", Menu);*/
 
         _keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         _keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
@@ -111,7 +111,7 @@ public class VentiladorController : MonoBehaviour
 
     //Right
     public void Right_(){
-        transform.Translate(2, 0, 0);
+        transform.Translate(10, 0, 0);
     }
 
     public void Right()

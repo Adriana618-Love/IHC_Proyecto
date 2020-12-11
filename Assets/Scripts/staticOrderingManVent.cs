@@ -55,7 +55,7 @@ public class staticOrderingManVent : MonoBehaviour
 		VentiladorController ventiladorController = Ventilador.GetComponent<VentiladorController>();
 		ventiladorController.DetectarMovimiento(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves);
 		yield return new WaitForSeconds(0.5f);
-		DetectarVentilador();
+		StartCoroutine("DetectarVentilador");
 	}
 
 	private IEnumerator TutorialEnd()

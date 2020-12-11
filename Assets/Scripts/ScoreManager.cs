@@ -87,7 +87,7 @@ public class ScoreManager : MonoBehaviour
         
         while (ballon.transform.position.y > 0.2f || ballon.transform.position.y < -0.2f) { 
             yield return new WaitForSeconds(0.2f); 
-            Debug.Log(ballon.transform.position);
+            //Debug.Log(ballon.transform.position);
         }
         yield return new WaitForSeconds(4f);
         score.GetComponent<Animator>().SetTrigger("finale");
