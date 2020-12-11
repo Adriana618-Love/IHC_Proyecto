@@ -326,9 +326,12 @@ public class serverManager : MonoBehaviour
 			GameObject greenCircle = estadoVentilador.transform.Find("GreenCIrcle").gameObject;
 
 			redCircle.SetActive(true); 
-			greenCircle.SetActive(false); 
+			greenCircle.SetActive(false);
 
-			StartCoroutine("salirMenu");
+			GameObject Game = GameObject.Find("Game");
+			Game.transform.Find("Ventilador").gameObject.SetActive(false);
+
+			//StartCoroutine("salirMenu");
 		}
 	}
 

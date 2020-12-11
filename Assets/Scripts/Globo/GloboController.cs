@@ -54,7 +54,7 @@ public class GloboController : MonoBehaviour
         static_speed = 4;
         speed = static_speed;
 
-        /*actions.Add("izquierda", Left);
+        actions.Add("izquierda", Left);
         actions.Add("derecha", Right);
 
         actions.Add("pausa", Stop);
@@ -62,7 +62,7 @@ public class GloboController : MonoBehaviour
 
         _keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         _keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
-        _keywordRecognizer.Start();*/
+        _keywordRecognizer.Start();
     }
 
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech)

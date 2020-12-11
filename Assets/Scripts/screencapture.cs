@@ -44,7 +44,7 @@ public class screencapture : MonoBehaviour
 		/*setupSocket();
 		theWriter.Write('Y');
 		theWriter.Flush();*/
-		//StartCoroutine("intentarConectar");
+		StartCoroutine("intentarConectar");
 	}
 
 	public void Update()
