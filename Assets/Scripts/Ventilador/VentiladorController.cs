@@ -60,8 +60,7 @@ public class VentiladorController : MonoBehaviour
         //server manager
         server = serverManager._server_;
         SetPush();
-        actions.Add("arriba", Elevar);
-        actions.Add("abajo", Bajar);
+        actions.Add("ve", Elevar);
 
         actions.Add("pausa", Stop);
         actions.Add("menu", Menu);

@@ -30,6 +30,8 @@ public class staticOrderingManVent : MonoBehaviour
 		//inicializar staticMan
 		staticMan = new StaticMan(gameObject, screencapture_.objectPose);
 		staticMan.makeMove();
+
+		StartCoroutine("DetectarVentilador");
 	}
 
 	// Update is called once per frame
@@ -37,11 +39,8 @@ public class staticOrderingManVent : MonoBehaviour
 	{
 		if (_tutorialInit)
 		{
-			//Debug.Log("Recibiendo movimientos");
-			//staticMan.compareMoves(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves) &&
-			VentiladorController ventiladorController = Ventilador.GetComponent<VentiladorController>();
-			ventiladorController.DetectarMovimiento(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves);
-			//count += 1;
+			
+			
 		}
 		if (count >= maxMoves)
 		{
@@ -49,6 +48,14 @@ public class staticOrderingManVent : MonoBehaviour
 			//Iniciar una coroutine
 			StartCoroutine("TutorialEnd");
 		}
+	}
+
+	private IEnumerator DetectarVentilador()
+	{
+		VentiladorController ventiladorController = Ventilador.GetComponent<VentiladorController>();
+		ventiladorController.DetectarMovimiento(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves);
+		yield return new WaitForSeconds(0.5f);
+		DetectarVentilador();
 	}
 
 	private IEnumerator TutorialEnd()
