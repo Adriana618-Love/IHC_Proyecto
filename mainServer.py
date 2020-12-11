@@ -267,6 +267,7 @@ def verificarConexionGlobo(conn_ventilador, globo_conectado_):
             print("Globo Desconecto ========================================")
             data = bytes('GD', 'utf-8')
             conn_ventilador.sendall(data)
+            break
         time.sleep(4)
 
 def verificarConexionVentilador(conn_globo, ventilador_conectado_):
@@ -280,6 +281,7 @@ def verificarConexionVentilador(conn_globo, ventilador_conectado_):
             print("Ventilador Desconecto ==========================================")
             data = bytes('VD', 'utf-8')
             conn_globo.sendall(data)
+            break
         time.sleep(4)
 
 class SocketClass:
