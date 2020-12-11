@@ -342,8 +342,10 @@ class SocketClass:
             vent_thread.start() 
 
             #correr threads que detectan acks
-            Thread(target=verificarConexionGlobo, args=(conn_ventilador, globo_conectado)).start()
-            Thread(target=verificarConexionVentilador, args=(conn_globo, ventilador_conectado)).start()
+            verificarConexionGlobo_thread = Thread(target=verificarConexionGlobo, args=(conn_ventilador, globo_conectado))
+            verificarConexionGlobo_thread.start()
+            verificarConexionVent_thread = Thread(target=verificarConexionVentilador, args=(conn_globo, ventilador_conectado))
+            verificarConexionVent_thread.start()
 
             #cometas
             cometas_thread = Thread_generadorCometas(conn_globo,conn_ventilador) 
@@ -359,8 +361,8 @@ class SocketClass:
 
             globo_thread.join()
             vent_thread.join()
-            #verificarConexionGlobo_thread.join()
-            #verificarConexionVent_thread.join()
+            verificarConexionGlobo_thread.join()
+            verificarConexionVent_thread.join()
             cometas_thread.join()
             ballonSpikes_thread.join()
             spikes_thread.join()
