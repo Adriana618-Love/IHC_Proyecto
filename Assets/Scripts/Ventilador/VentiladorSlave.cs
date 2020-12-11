@@ -101,7 +101,7 @@ public class VentiladorSlave : MonoBehaviour
 
     //Right
     public void Right_(){
-        transform.Translate(2, 0, 0);
+        transform.Translate(10, 0, 0);
     }
 
     public void GirarAntihorario_()
