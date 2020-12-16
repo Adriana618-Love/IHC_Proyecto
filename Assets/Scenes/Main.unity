@@ -2447,7 +2447,7 @@ MonoBehaviour:
   max_score: 3
   DificultyShow: {fileID: 1857837815}
   DifShow: {fileID: 1857837812}
-  ObjetPose: {fileID: 0}
+  ObjetPose: {fileID: 757391769}
 --- !u!1 &1188941335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,6 +4628,14 @@ PrefabInstance:
       propertyPath: screen_capture
       value: 
       objectReference: {fileID: 757391769}
+    - target: {fileID: 3572566727059065848, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
+      propertyPath: VIDAS
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3572566727059065848, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
+      propertyPath: minY
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
 --- !u!1001 &2987744422064993320

@@ -35,7 +35,7 @@ public class GloboController : MonoBehaviour
     private KeywordRecognizer _keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
-    public int VIDAS;
+    public int VIDAS=3;
     public TextMeshProUGUI vidas_text;
     // Start is called before the first frame update
 
@@ -46,7 +46,7 @@ public class GloboController : MonoBehaviour
         trampolinAudio = sounds[1];
         animator = this.GetComponent<Animator>();
         static_speed = Configs.configuraciones.speed_globo;
-
+        VIDAS = 3;
         //server manager
         server = serverManager._server_;
     }
@@ -67,6 +67,7 @@ public class GloboController : MonoBehaviour
         _keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         _keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
         _keywordRecognizer.Start();
+        Invoke("Free", 5.0f);
     }
 
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech)
@@ -204,7 +205,10 @@ public class GloboController : MonoBehaviour
             _status = 1;
         }
     }
-
+    public void Free()
+    {
+        minY = -10000;
+    }
     // Update is called once per frame
     void Update()
     {

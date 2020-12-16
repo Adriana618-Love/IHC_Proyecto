@@ -42,6 +42,7 @@ public class GloboSlave : MonoBehaviour
         direction = new Vector2(4, -4);
         static_speed = 4;
         speed = static_speed;
+        Invoke("Free", 5.0f);
     }
 
     public void Left_()
@@ -130,7 +131,10 @@ public class GloboSlave : MonoBehaviour
             _status = 1;
         }
     }
-
+    public void Free()
+    {
+        minY = -10000;
+    }
     // Update is called once per frame
     void Update()
     {

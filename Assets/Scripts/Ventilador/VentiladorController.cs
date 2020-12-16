@@ -66,7 +66,8 @@ public class VentiladorController : MonoBehaviour
         //server manager
         server = serverManager._server_;
         SetPush();
-        healthbar.value = energy;
+        energy = 1;
+        healthbar.value = 1;
         StartCoroutine("DownHealthBar");
         actions.Add("go", Right);
 
@@ -220,7 +221,8 @@ public class VentiladorController : MonoBehaviour
     {
         //enviar a server aumento de energia
         server.write("UV");
-        energy += 0.2f;
+        energy += 0.3f;
+        healthbar.value = energy;
     }
 
     public void BlindHealthBar()
@@ -329,7 +331,7 @@ public class VentiladorController : MonoBehaviour
 
     public IEnumerator DownHealthBar()
     {
-        healthbar.value -= 0.05f;
+        healthbar.value -= 0.02f;
         yield return new WaitForSeconds(1.0f);
         StartCoroutine("DownHealthBar");
         Debug.Log(healthbar.value);
