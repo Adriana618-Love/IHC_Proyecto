@@ -776,7 +776,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   explosion: {fileID: 0}
   pausa_object: {fileID: 0}
-  minY: -100
+  minY: 0
   initPos: {x: 0, y: 0}
   static_speed: 0
   sounds: []

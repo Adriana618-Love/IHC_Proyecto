@@ -8,7 +8,7 @@ using TMPro;
 public class staticOrderingManVent : MonoBehaviour
 {
 	[SerializeField]
-	private screencapture screencapture_;
+	public screencapture screencapture_;
 
 	StaticMan staticMan;
 	public Text texto;
@@ -53,6 +53,9 @@ public class staticOrderingManVent : MonoBehaviour
 	private IEnumerator DetectarVentilador()
 	{
 		VentiladorController ventiladorController = Ventilador.GetComponent<VentiladorController>();
+		Debug.Log("----------------");
+		Debug.Log(screencapture_.objectPose.moves);
+		Debug.Log("==========================");
 		ventiladorController.DetectarMovimiento(screencapture_.objectPose.moves, screencapture_.objectPose.numMoves);
 		yield return new WaitForSeconds(0.5f);
 		StartCoroutine("DetectarVentilador");

@@ -42,7 +42,7 @@ public class GloboSlave : MonoBehaviour
         direction = new Vector2(4, -4);
         static_speed = 4;
         speed = static_speed;
-        Invoke("Free", 5.0f);
+        Invoke("Free", 5f);
     }
 
     public void Left_()
