@@ -41,6 +41,9 @@ public class VentiladorController : MonoBehaviour
 
     private KeywordRecognizer _keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
+
+    public float enery; //0% -> 100%
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -208,6 +211,10 @@ public class VentiladorController : MonoBehaviour
         SceneManager.LoadScene("menuScene");
     }
 
+    public void AddEnergy()
+    {
+        enery += 0.2f;
+    }
 
     public IEnumerator ElevateSimple()
     {
@@ -300,6 +307,11 @@ public class VentiladorController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             Menu();
+        }
+        if (enery <= 0)
+        {
+            /*Caerse*/
+            this.GetComponent<Rigidbody2D>().gravityScale = 1;
         }
     }
 

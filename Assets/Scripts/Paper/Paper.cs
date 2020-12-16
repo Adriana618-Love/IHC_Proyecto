@@ -48,6 +48,14 @@ public class Paper : MonoBehaviour
         Debug.Log("NOMBRE: "+collision.gameObject.name);
         if (collision.gameObject.name == target)
         {
+            if(collision.gameObject.name == "Balloon")
+            {
+                collision.gameObject.GetComponent<GloboController>().AddVIDA();
+            }
+            else
+            {
+                collision.gameObject.GetComponent<VentiladorController>().AddEnergy();
+            }
             Debug.Log("Cogiste un paper o pila");
             blind(this.gameObject);
             StartCoroutine("changePosition");

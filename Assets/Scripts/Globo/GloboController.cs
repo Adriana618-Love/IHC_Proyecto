@@ -171,7 +171,7 @@ public class GloboController : MonoBehaviour
         direction.y = -4;
     }
 
-    public void RandomVIDA()
+    public void AddVIDA()
     {
         //enviar a server aumento de vida
         server.write("UG");
