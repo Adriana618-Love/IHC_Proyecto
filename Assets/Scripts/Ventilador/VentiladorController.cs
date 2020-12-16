@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VentiladorController : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class VentiladorController : MonoBehaviour
 
     public float energy = 1; //0 -> 1
 
+    public Slider healthbar;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -63,6 +66,8 @@ public class VentiladorController : MonoBehaviour
         //server manager
         server = serverManager._server_;
         SetPush();
+        healthbar.value = energy;
+        StartCoroutine("DownHealthBar");
         actions.Add("go", Right);
 
         /*actions.Add("pausa", Stop);
@@ -315,6 +320,14 @@ public class VentiladorController : MonoBehaviour
             /*Caerse*/
             //this.GetComponent<Rigidbody2D>().gravityScale = 1;
         }
+    }
+
+    public IEnumerator DownHealthBar()
+    {
+        healthbar.value -= 0.05f;
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine("DownHealthBar");
+        Debug.Log(healthbar.value);
     }
 
     //funcion llamada por staticOrderingManVent

@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VentiladorSlave : MonoBehaviour
 {
@@ -34,16 +35,20 @@ public class VentiladorSlave : MonoBehaviour
     private int _status; /*-1 => Exploto, 0 => Nada, 1 => Rebote*/
     // Start is called before the first frame update
 
-    public float energy; //0% -> 100%
-    
+    public float energy = 1; //0 -> 1
+
+    public Slider healthbar;
+
     void Start()
     {
         initPos = this.transform.position;
         direction = new Vector2(4, -4);
         speed = static_speed;
+        healthbar.value = energy;
         //server manager
         server = serverManager._server_;
         SetPush();
+        StartCoroutine("DownHealthBar");
     }
 
     public void AddEnergy()
@@ -129,5 +134,11 @@ public class VentiladorSlave : MonoBehaviour
     void Update()
     {
 
+    }
+    public IEnumerator DownHealthBar()
+    {
+        healthbar.value -= 0.02f;
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine("DownHealthBar");
     }
 }
