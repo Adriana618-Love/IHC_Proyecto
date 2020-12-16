@@ -171,7 +171,7 @@ public class GloboController : MonoBehaviour
         direction.y = -4;
     }
 
-    public void RandomVIDA()
+    public void AddVIDA()
     {
         if (UnityEngine.Random.value <= 0.4)
         {
