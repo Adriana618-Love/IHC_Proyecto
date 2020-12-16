@@ -34,6 +34,8 @@ public class VentiladorSlave : MonoBehaviour
     private int _status; /*-1 => Exploto, 0 => Nada, 1 => Rebote*/
     // Start is called before the first frame update
 
+    public float energy; //0% -> 100%
+    
     void Start()
     {
         initPos = this.transform.position;
@@ -42,6 +44,11 @@ public class VentiladorSlave : MonoBehaviour
         //server manager
         server = serverManager._server_;
         SetPush();
+    }
+
+    public void AddEnergy()
+    {
+        energy += 0.2f;
     }
 
     private void DeactivateAll()

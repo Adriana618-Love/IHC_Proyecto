@@ -229,16 +229,6 @@ public class serverManager : MonoBehaviour
 					agregarVidaVentilador();
 				}
             }
-			else if(mensaje[0] == 'D')
-            {
-				//mensaje para restar vidas
-				if(mensaje[1] == 'G'){
-					restarVidaGlobo();
-				}
-				else if(mensaje[1] == 'V'){
-					restarVidaVentilador();
-				}
-            }
 			else if(mensaje[0] == 'A')
             {
 				setRol(mensaje);
@@ -262,22 +252,12 @@ public class serverManager : MonoBehaviour
 
 	public void agregarVidaGlobo()
 	{
-		
+		globoController.AddVIDA();
 	}
 
 	public void agregarVidaVentilador()
 	{
-		
-	}
-
-	public void restarVidaGlobo()
-	{
-		
-	}
-
-	public void restarVidaVentilador()
-	{
-		
+		ventiladorController.AddEnergy();
 	}
 
 	public void redirectScene(string mensaje)

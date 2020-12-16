@@ -256,13 +256,6 @@ class Thread_generadorBallonSpikes(Thread):
         return mensaje
 
 
-def generarGravedad(conn_globo, conn_ventilador):
-    time.sleep(10)
-    data = bytes('HG', 'utf-8')
-    conn_globo.sendall(data)
-    conn_ventilador.sendall(data)
-    print ("Server envio a ambos datos [gravedad]:", data)    
-        
 def verificarConexionGlobo(conn_ventilador, globo_conectado_):
     while True:
         global globo_conectado
@@ -348,10 +341,6 @@ class SocketClass:
             vent_thread = ClientThread_ventilador(ip_vent,port_vent,conn_globo,conn_ventilador) 
             vent_thread.start() 
 
-            #thread para generar gravedad
-            generarGravedad_thread = Thread(target=generarGravedad, args=(conn_globo, ventilador_conectado))
-            generarGravedad_thread.start()
-
             #correr threads que detectan acks
             verificarConexionGlobo_thread = Thread(target=verificarConexionGlobo, args=(conn_ventilador, globo_conectado))
             verificarConexionGlobo_thread.start()
@@ -370,7 +359,6 @@ class SocketClass:
             spikes_thread = Thread_generadorSPikes(conn_globo,conn_ventilador) 
             spikes_thread.start()
 
-            generarGravedad_thread.join()
             globo_thread.join()
             vent_thread.join()
             verificarConexionGlobo_thread.join()

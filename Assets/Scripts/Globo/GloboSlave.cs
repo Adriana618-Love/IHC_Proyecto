@@ -101,13 +101,10 @@ public class GloboSlave : MonoBehaviour
         direction.y = -4;
     }
 
-    public void RandomVIDA()
+    public void AddVIDA()
     {
-        if (UnityEngine.Random.value <= 0.4)
-        {
-            VIDAS += 1;
-            vidas_text.text = "vidas:" + VIDAS;
-        }
+        VIDAS += 1;
+        vidas_text.text = "vidas:" + VIDAS;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
