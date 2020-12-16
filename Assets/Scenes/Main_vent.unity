@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adaaf61cd3928e44960a55cba516030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  text: {fileID: 1402535590}
 --- !u!212 &154677756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -583,6 +583,7 @@ RectTransform:
   - {fileID: 2137543130}
   - {fileID: 2056017518}
   - {fileID: 882622998}
+  - {fileID: 1584998620}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -705,8 +706,8 @@ MonoBehaviour:
   sounds: []
   trampolinAudio: {fileID: 0}
   estallandoAudio: {fileID: 0}
-  VIDAS: 0
-  vidas_text: {fileID: 0}
+  VIDAS: 3
+  vidas_text: {fileID: 2056017520}
 --- !u!95 &448998278
 Animator:
   serializedVersion: 3
@@ -2334,7 +2335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1183211646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b744e71f5662d946995e2a49bb4b75a, type: 3}
+  m_Script: {fileID: 11500000, guid: a1283d37286bfb24581e07652ce2de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   openpose: {fileID: 1207124261}
@@ -2345,7 +2346,7 @@ MonoBehaviour:
   max_score: 3
   DificultyShow: {fileID: 154677755}
   DifShow: {fileID: 154677754}
-  ObjetPose: {fileID: 0}
+  ObjetPose: {fileID: 757391769}
 --- !u!1 &1207124261
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,6 +3435,93 @@ Transform:
   m_Father: {fileID: 2077270923}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1584998619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584998620}
+  - component: {fileID: 1584998621}
+  m_Layer: 5
+  m_Name: vent_vidas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1584998620
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584998619}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5.00004, y: 5.00004, z: 1.00008}
+  m_Children: []
+  m_Father: {fileID: 299429696}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -370.50003, y: 40.000004}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!212 &1584998621
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584998619}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 530cc3af82b4d524bb63abc9221fbc24, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.52, y: 0.45}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1733601241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3868,6 +3956,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ventilador
       objectReference: {fileID: 0}
+    - target: {fileID: 3845702911875097239, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4100483789794283233, guid: 597e2e654bd476e4a99aa32255dfedfa, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4017,7 +4109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'vidas:'
+  m_text: 'vidas: 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -4127,8 +4219,8 @@ Transform:
   - {fileID: 634269675}
   - {fileID: 1545007230}
   - {fileID: 1404813742}
-  - {fileID: 1173824094403326334}
   - {fileID: 1834299905}
+  - {fileID: 1173824094403326334}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4407,7 +4499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1173824094499986169, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1173824094499986169, guid: 0440e834b98c78344b26bab114f7c271, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4481,12 +4573,16 @@ PrefabInstance:
       value: Pila
       objectReference: {fileID: 0}
     - target: {fileID: 4774905291991709701, guid: d94a485103b87de448ca6fa62f741988, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774905291991709701, guid: d94a485103b87de448ca6fa62f741988, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4774905291991710715, guid: d94a485103b87de448ca6fa62f741988, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4774905291991710715, guid: d94a485103b87de448ca6fa62f741988, type: 3}
       propertyPath: m_LocalPosition.x
