@@ -220,7 +220,8 @@ public class VentiladorController : MonoBehaviour
     {
         //enviar a server aumento de energia
         server.write("UV");
-        energy += 0.2f;
+        energy += 0.3f;
+        healthbar.value = energy;
     }
 
     public IEnumerator ElevateSimple()
@@ -324,7 +325,7 @@ public class VentiladorController : MonoBehaviour
 
     public IEnumerator DownHealthBar()
     {
-        healthbar.value -= 0.05f;
+        healthbar.value -= 0.02f;
         yield return new WaitForSeconds(1.0f);
         StartCoroutine("DownHealthBar");
         Debug.Log(healthbar.value);
