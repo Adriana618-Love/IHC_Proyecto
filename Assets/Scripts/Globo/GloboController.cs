@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 using UnityEngine.Windows.Speech;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,9 @@ public class GloboController : MonoBehaviour
 
     private KeywordRecognizer _keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
+
+    public int VIDAS;
+    public TextMeshProUGUI vidas_text;
     // Start is called before the first frame update
 
     private void Awake()
@@ -167,16 +171,29 @@ public class GloboController : MonoBehaviour
         direction.y = -4;
     }
 
+    public void RandomVIDA()
+    {
+        if (UnityEngine.Random.value <= 0.4)
+        {
+            VIDAS += 1;
+            vidas_text.text = "vidas:" + VIDAS;
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Spikes(Clone)")
+        if (collision.gameObject.name == "Spikes(Clone)" && _status != -1)
         {
+            _status = -1;
+            VIDAS -= 1;
+            vidas_text.text = "vidas:" + VIDAS;
+            speed = 0f;
             Debug.Log("Explosion");
             direction.y = direction.x = 0;
             animator.SetTrigger("pum");
             estallandoAudio.Play();
-            Invoke("SetInit", 1);
-            _status = -1;
+            if (VIDAS > 0) Invoke("SetInit", 1);
+
         }
         else if (collision.gameObject.name == "Trampolin(Clone)")
         {
