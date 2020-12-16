@@ -2126,6 +2126,7 @@ MonoBehaviour:
   score: {fileID: 1138206188}
   max_score: 3
   configs: {fileID: 0}
+  server: {fileID: 0}
 --- !u!1 &1207124261
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,6 +4020,10 @@ PrefabInstance:
     - target: {fileID: 6299672066026733981, guid: 8232747cb8941ae41bccda6deef7fa0c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607917759261332071, guid: 8232747cb8941ae41bccda6deef7fa0c, type: 3}
+      propertyPath: target
+      value: Balloon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8232747cb8941ae41bccda6deef7fa0c, type: 3}

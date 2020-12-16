@@ -10,6 +10,7 @@ public class Paper : MonoBehaviour
     public float minY;
     public float maxY;
     private float waitingTime;
+    public string target;
     void Start()
     {
         Camera cam = Camera.main;
@@ -44,9 +45,13 @@ public class Paper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Cogiste un paper");
-        blind(this.gameObject);
-        StartCoroutine("changePosition");
+        Debug.Log("NOMBRE: "+collision.gameObject.name);
+        if (collision.gameObject.name == target)
+        {
+            Debug.Log("Cogiste un paper o pila");
+            blind(this.gameObject);
+            StartCoroutine("changePosition");
+        }
     }
 
     IEnumerator changePosition()
