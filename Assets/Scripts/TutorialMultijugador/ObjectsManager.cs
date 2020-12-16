@@ -22,6 +22,8 @@ public class ObjectsManager : MonoBehaviour
     public GameObject MainCamera;
     public GameObject Minigame;
     public Camara Cam;
+    public GameObject Desconection;
+    public GameObject Conection;
     #endregion
 
     public Vector2 origin;
@@ -144,10 +146,60 @@ public class ObjectsManager : MonoBehaviour
         ///
         yield return new WaitForSeconds(trnstion_time);
         ///////Sobrevivie el máximo de tiempo posible///////
+        text.text = "Sobrevivie el máximo de tiempo posible";
         Globo.SetActive(false);
         Paper.SetActive(false);
+        ////////////////////////////////////////////////////
+        yield return new WaitForSeconds(trnstion_time);
+        text.text = "";
+        /////////////Verifica tu conexión///////////////
+        text.text = "Verifica tu conexión";
+        Conection.SetActive(true);
+        Conection.transform.position = origin;
+        //////////////////////////////////////
+        yield return new WaitForSeconds(trnstion_time);
+        text.text = "";
+        Conection.SetActive(false);
+        /////////////Conectado////////////////
+        text.text = "Conectado";
+        Desconection.SetActive(true);
+        Desconection.transform.position = new Vector2(origin.x, origin.y-1);
+        yield return new WaitForSeconds(trnstion_time);
+        /////////////Desconectado//////////////
+        text.text = "Desconectado";
+        Desconection.transform.position = new Vector2(origin.x, origin.y - 1);
+        Desconection.GetComponent<Animator>().SetTrigger("click");
+        ///////////////////////////////////////
+        yield return new WaitForSeconds(trnstion_time);
+        Desconection.SetActive(false);
+        /////////////Globo sigue jugando///////
+        text.text = "Si el ventilador se desconecta, el Globo sigue jugando";
+        Globo.SetActive(true);
+        Globo.transform.position = new Vector2(origin.x, origin.y - (Mathf.Abs(-Cam.Down + origin.y)) / 2);
+        ///////////////////////////////////////
 
-        SceneManager.LoadScene("menuScene");
+        yield return new WaitForSeconds(trnstion_time);
+        Globo.SetActive(false);
+        ////////////Ventilador se desconecta//////////////
+        text.text = "Si el glob se desconecta, el Ventilador no sigue jugando";
+        Ventilador.SetActive(true);
+        Ventilador.transform.position = new Vector2(origin.x, origin.y - (Mathf.Abs(-Cam.Down + origin.y)) / 2);
+        yield return new WaitForSeconds(trnstion_time);
+        Ventilador.SetActive(false);
+        /////////////////////////////////////////////////
+        yield return new WaitForSeconds(trnstion_time);
+        text.text = "";
+        ///////////Movimientos de Ventilador/////////////
+        text.text = "Grita Go para que el Ventilador avance";
+        Ventilador.SetActive(true);
+        Ventilador.transform.position = new Vector2(origin.x, origin.y - (Mathf.Abs(-Cam.Down + origin.y)) / 2);
+        while (Ventilador.transform.position == new Vector3(origin.x,origin.y,Ventilador.transform.position.z))
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        /////////////////////////////////////////////////
+
+        SceneManager.LoadScene("inicioVent");
     }
 
 }
