@@ -223,6 +223,11 @@ public class VentiladorController : MonoBehaviour
         energy += 0.2f;
     }
 
+    public void BlindHealthBar()
+    {
+        healthbar.enabled = false;
+    }
+
     public IEnumerator ElevateSimple()
     {
         if (this.transform.position.y < 0)

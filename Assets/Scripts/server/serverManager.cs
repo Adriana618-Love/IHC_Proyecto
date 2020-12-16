@@ -18,8 +18,8 @@ public class serverManager : MonoBehaviour
 	NetworkStream theStream;
 	StreamWriter theWriter;
 	StreamReader theReader;
-	String Host = "26.162.26.142";
-	//String Host = "127.0.0.1";
+	//String Host = "26.162.26.142";
+	String Host = "127.0.0.1";
 	Int32 Port = 2000;
 	ReadServer readServer;
 
@@ -354,6 +354,11 @@ public class serverManager : MonoBehaviour
 			//setear sprite de color rojo 
 			GameObject redCircle = estadoVentilador.transform.Find("RedCircle").gameObject;
 			GameObject greenCircle = estadoVentilador.transform.Find("GreenCIrcle").gameObject;
+			///Ocultando la barra y ventilador estático
+			GameObject Canvas = GameObject.Find("Canvas");
+			Canvas.transform.Find("HealthBar").gameObject.SetActive(false);
+			Canvas.transform.Find("vent_vidas").gameObject.SetActive(false);
+			
 
 			redCircle.SetActive(true); 
 			greenCircle.SetActive(false);
