@@ -173,17 +173,18 @@ public class GloboController : MonoBehaviour
 
     public void RandomVIDA()
     {
-        if (UnityEngine.Random.value <= 0.4)
-        {
-            VIDAS += 1;
-            vidas_text.text = "vidas:" + VIDAS;
-        }
+        //enviar a server aumento de vida
+        server.write("UG");
+        VIDAS += 1;
+        vidas_text.text = "vidas:" + VIDAS;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Spikes(Clone)" && _status != -1)
         {
+            //enviar a server disminucion de vida
+            server.write("DG");
             _status = -1;
             VIDAS -= 1;
             vidas_text.text = "vidas:" + VIDAS;

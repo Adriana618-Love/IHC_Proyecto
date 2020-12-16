@@ -214,6 +214,31 @@ public class serverManager : MonoBehaviour
 				Debug.Log("mensaje ventilador: " + mensaje);
 				detectVentiladorMove(mensaje);
 			}
+			else if(mensaje[0] == 'H')
+            {
+				//mensaje para activar la gravedad x3
+				activarGravedad();
+            }
+			else if(mensaje[0] == 'U')
+            {
+				//mensaje para sumar vidas
+				if(mensaje[1] == 'G'){
+					agregarVidaGlobo();
+				}
+				else if(mensaje[1] == 'V'){
+					agregarVidaVentilador();
+				}
+            }
+			else if(mensaje[0] == 'D')
+            {
+				//mensaje para restar vidas
+				if(mensaje[1] == 'G'){
+					restarVidaGlobo();
+				}
+				else if(mensaje[1] == 'V'){
+					restarVidaVentilador();
+				}
+            }
 			else if(mensaje[0] == 'A')
             {
 				setRol(mensaje);
@@ -228,6 +253,31 @@ public class serverManager : MonoBehaviour
             }
 
 		}
+	}
+
+	public void activarGravedad()
+	{
+		
+	}
+
+	public void agregarVidaGlobo()
+	{
+		
+	}
+
+	public void agregarVidaVentilador()
+	{
+		
+	}
+
+	public void restarVidaGlobo()
+	{
+		
+	}
+
+	public void restarVidaVentilador()
+	{
+		
 	}
 
 	public void redirectScene(string mensaje)
