@@ -288,7 +288,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 299429696}
-  m_RootOrder: 12
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adaaf61cd3928e44960a55cba516030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  text: {fileID: 1402535590}
 --- !u!212 &154677756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -810,8 +810,10 @@ RectTransform:
   - {fileID: 486986720}
   - {fileID: 211780553}
   - {fileID: 2137543130}
-  - {fileID: 33740626}
+  - {fileID: 2056017518}
   - {fileID: 1405798824}
+  - {fileID: 882622998}
+  - {fileID: 33740626}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1989,7 +1991,7 @@ RectTransform:
   m_LocalScale: {x: 10, y: 10, z: 1.0000359}
   m_Children: []
   m_Father: {fileID: 299429696}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

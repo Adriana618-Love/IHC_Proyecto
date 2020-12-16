@@ -42,7 +42,7 @@ public class VentiladorController : MonoBehaviour
     private KeywordRecognizer _keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
-    public float energy; //0% -> 100%
+    public float energy = 1; //0% -> 100%
 
     // Start is called before the first frame update
 
