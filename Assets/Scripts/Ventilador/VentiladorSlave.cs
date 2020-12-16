@@ -44,7 +44,8 @@ public class VentiladorSlave : MonoBehaviour
         initPos = this.transform.position;
         direction = new Vector2(4, -4);
         speed = static_speed;
-        healthbar.value = energy;
+        energy = 1;
+        healthbar.value = 1;
         //server manager
         server = serverManager._server_;
         SetPush();
@@ -53,7 +54,8 @@ public class VentiladorSlave : MonoBehaviour
 
     public void AddEnergy()
     {
-        energy += 0.2f;
+        energy += 0.3f;
+        healthbar.value = energy;
     }
 
     private void DeactivateAll()
