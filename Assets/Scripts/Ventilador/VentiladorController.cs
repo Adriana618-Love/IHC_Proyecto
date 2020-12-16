@@ -42,7 +42,7 @@ public class VentiladorController : MonoBehaviour
     private KeywordRecognizer _keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
-    public float energy = 1; //0% -> 100%
+    public float energy = 1; //0 -> 1
 
     // Start is called before the first frame update
 
@@ -313,7 +313,7 @@ public class VentiladorController : MonoBehaviour
         if (energy <= 0)
         {
             /*Caerse*/
-            this.GetComponent<Rigidbody2D>().gravityScale = 1;
+            //this.GetComponent<Rigidbody2D>().gravityScale = 1;
         }
     }
 

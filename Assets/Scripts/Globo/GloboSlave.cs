@@ -24,7 +24,7 @@ public class GloboSlave : MonoBehaviour
     private Animator animator;
 
     private int _status; /*-1 => Exploto, 0 => Nada, 1 => Rebote*/
-    public int VIDAS;
+    public int VIDAS = 3;
     public TextMeshProUGUI vidas_text;
 
     private void Awake()
