@@ -24,6 +24,7 @@ public class ObjectsManager : MonoBehaviour
     public Camara Cam;
     public GameObject Desconection;
     public GameObject Conection;
+    public GameObject Pila;
     #endregion
 
     public Vector2 origin;
@@ -112,6 +113,19 @@ public class ObjectsManager : MonoBehaviour
         Ventilador.transform.position = new Vector2(origin.x - (Mathf.Abs(-Cam.Left + origin.x)) / 2, origin.y + (Mathf.Abs(Cam.Top - origin.y)) / 2);
         ///
         yield return new WaitForSeconds(trnstion_time);
+        ///////Recolecta los paper para vidas extra///////
+        text.text = "Recolecta las pilas para mantener tu energía";
+        Ventilador.transform.position = new Vector2(origin.x - (Mathf.Abs(Cam.Right - origin.x)) / 2, origin.y);
+        Pila.SetActive(true);
+        Pila.transform.position = new Vector2(origin.x + (Mathf.Abs(Cam.Right - origin.x)) / 2, origin.y);
+        yield return new WaitForSeconds(1);
+        Ventilador.GetComponent<VentiladorController>().Right_();
+        Pila.SetActive(false);
+        yield return new WaitForSeconds(1);
+        //Ventilador.GetComponent<GloboController>().Right_();
+        Ventilador.SetActive(false);
+        ///
+        yield return new WaitForSeconds(trnstion_time);
         ///////Globo///////
         text.text = "Globo";
         Globo_enpinchado.SetActive(false);
@@ -136,7 +150,7 @@ public class ObjectsManager : MonoBehaviour
         ///////Recolecta los paper para vidas extra///////
         Cometas.SetActive(false);
         text.text = "Recolecta los paper para vidas extra";
-        Globo.transform.position = origin;
+        Globo.transform.position = new Vector2(origin.x, origin.y-1);
         Paper.SetActive(true);
         Paper.transform.position = new Vector2(origin.x + (Mathf.Abs(Cam.Right - origin.x)) / 2, origin.y);
         yield return new WaitForSeconds(1);
@@ -193,13 +207,13 @@ public class ObjectsManager : MonoBehaviour
         text.text = "Grita Go para que el Ventilador avance";
         Ventilador.SetActive(true);
         Ventilador.transform.position = new Vector2(origin.x, origin.y - (Mathf.Abs(-Cam.Down + origin.y)) / 2);
-        while (Ventilador.transform.position == new Vector3(origin.x,origin.y,Ventilador.transform.position.z))
+        while (Ventilador.transform.position == new Vector3(origin.x, origin.y - (Mathf.Abs(-Cam.Down + origin.y)) / 2, Ventilador.transform.position.z))
         {
             yield return new WaitForSeconds(0.5f);
         }
         /////////////////////////////////////////////////
-
-        SceneManager.LoadScene("inicioVent");
+        yield return new WaitForSeconds(trnstion_time);
+        SceneManager.LoadScene("menuScene");
     }
 
 }
