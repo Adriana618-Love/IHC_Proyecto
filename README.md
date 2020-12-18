@@ -24,7 +24,7 @@ Para correr el modelo, puedes descargarlo pre-entrenado de: https://download.01.
 Se recomienda un espacio moderadamente amplio para poder jugar, asi como una laptop con cámara web.
 
 ## VIDEO
-El video se encuentra subido a Youtube: https://youtu.be/MPAXFP9_DqE
+El video se encuentra subido a Youtube: https://youtu.be/oePEnBFSisE
 
 ## JUEGO
 El juego ya compilado se encuentra en la carpeta JUEGO_COMPILADO

@@ -22,15 +22,18 @@ public class screencapture : MonoBehaviour
 
 	WebCamTexture webCamTexture;
 
-	// Take a shot immediately
-	public void Start()
-	{
+	private void Awake()
+    {
 		//ocultar gameObject
 		gameObject.GetComponent<Renderer>().enabled = false;
 
 		//setear objectPose
 		objectPose = new ObjectPose(gameObject);
+    }
 
+	// Take a shot immediately
+	public void Start()
+	{
 		//setear webcam
 		/*webCamTexture = new WebCamTexture();
 		Debug.Log(webCamTexture.deviceName);
@@ -272,8 +275,8 @@ public class ObjectPose
 	public ObjectPose staticMan;
 	public GameObject currentGameObject;
 
-	public string[] moves;
-	public int numMoves;
+	public string[] moves = {};
+	public int numMoves = 0;
 	public point[] keyPoints;
 	public const int numKeyPoints = 18;
 	public GameObject[] lines;

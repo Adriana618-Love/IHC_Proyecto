@@ -211,6 +211,7 @@ public class ObjectsManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
         }
+        yield return new WaitForSeconds(trnstion_time);
         /////////////////////////////////////////////////
         yield return new WaitForSeconds(trnstion_time);
         SceneManager.LoadScene("menuScene");
